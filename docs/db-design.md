@@ -71,9 +71,6 @@ memory{
 
 letter_soup{
     data:[
-        {
-            first,
-            second
-        }
+        palabra
     ]
 }
