@@ -14,7 +14,7 @@ const routes = require("./app/routes/index");
 const morgan = require("morgan");
 
 const PUERTO = process.env.PUERTO || 5000;
-app.use(morgan);
+app.use(morgan('dev'));
 //Hacer uso de cors y permitir los json
 app.use(express.json());
 app.use(body_parser.json());
