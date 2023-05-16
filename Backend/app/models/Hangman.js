@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const model = mongoose.model;
+
 const hangmanSchema = new Schema({
     data: [{
         pregunta:{
@@ -15,4 +16,5 @@ const hangmanSchema = new Schema({
 }, {
     versionKey: false
 });
+
 module.exports = model('hangmans', hangmanSchema);
