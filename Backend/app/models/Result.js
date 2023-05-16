@@ -1,25 +1,29 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const model = mongoose.model;
-const resultsSchema = new Schema({
+const resultSchema = new Schema({
     game_id: {
         type: Schema.Types.ObjectId,
         ref:"GameType",
         require:true,
     },
     username: {
-        type: String
+        type: String,
+        require:true,
     },
     password: {
-         type: String
+         type: String,
+         require:true,
     },
     fullname: {
-        type: String
+        type: String,
+        require:true,
     },
     datebirth: {
-        type: DATE
+        type: DATE,
+        require:true,
     }
 }, {
     versionKey: false
 });
-module.exports=model('results',resultsSchema);
+module.exports=model('results',resultSchema);

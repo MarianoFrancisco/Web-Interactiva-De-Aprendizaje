@@ -3,10 +3,12 @@ const Schema = mongoose.Schema;
 const model = mongoose.model;
 const gameTypeSchema = new Schema({
     code: {
-        type: String
+        type: String,
+        require:true,
     },
     name: {
-        type: String
+        type: String,
+        require:true,
     },
     description: {
          type: String
