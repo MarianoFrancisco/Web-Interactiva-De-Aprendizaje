@@ -2,15 +2,15 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  firstname: {
-    type: String,
-    required: true,
-  },
-  lastname: {
+  fullname: {
     type: String,
     required: true,
   },
   username: {
+    type: String,
+    required: true,
+  },
+  email: {
     type: String,
     required: true,
   },
@@ -19,11 +19,15 @@ const userSchema = new Schema({
       type: Number,
       default: 2000,
     },
-    Delivery: Number,
+    Teacher: Number,
     Admin: Number,
   },
   password: {
     type: String,
+    required: true,
+  },
+  birthdayDate: {
+    type: Date,
     required: true,
   },
   refreshToken: String,
