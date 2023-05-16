@@ -16,4 +16,4 @@ const gameTypeSchema = new Schema({
 }, {
     versionKey: false
 });
-module.exports=model('game_types',gameTypeSchema);
+module.exports=model('gametypes',gameTypeSchema);

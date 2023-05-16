@@ -7,7 +7,7 @@ const resultSchema = new Schema({
         ref: "Game",
         required: true,
     },
-    players: {
+    players: [{
         player: {
             type: Schema.Types.ObjectId,
             ref: "User",
@@ -25,7 +25,7 @@ const resultSchema = new Schema({
             type: Date,
             required: true,
         }
-    }
+    }]
 
 }, {
     versionKey: false
