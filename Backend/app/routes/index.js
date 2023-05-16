@@ -3,6 +3,7 @@ const router = express.Router()
 
 const ahorcadoRoute = require('./app/routes/ahorcado.routes');
 const gameTypeRoute = require('./app/routes/gameType.routes');
+const gameRoute = require('./app/routes/game.routes');
 const letterSoupRoute = require('./app/routes/letterSoup.routes');
 const memoryRoute = require('./app/routes/memory.routes');
 const quizRoute = require('./app/routes/quiz.routes');
@@ -11,6 +12,7 @@ const userRoute = require('./app/routes/user.routes');
 
 app.use('/ahorcado', ahorcadoRoute);
 app.use('/gameType', gameTypeRoute);
+app.use('/game', gameRoute);
 app.use('/letterSoup', letterSoupRoute);
 app.use('/memory', memoryRoute);
 app.use('/quiz', quizRoute);

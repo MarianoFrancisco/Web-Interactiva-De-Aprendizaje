@@ -4,30 +4,30 @@ const model = mongoose.model;
 const resultSchema = new Schema({
     game_id: {
         type: Schema.Types.ObjectId,
-        ref:"GameType",
-        required:true,
+        ref: "Game",
+        required: true,
     },
-    players:[
-        {
-           id:{
-            type:String,
-            required:true,
-           },
-           score:{
-            type:Number,
-            required:true,
-           },
-           position:{
-            type:Number,
-            required:true,
-           },
-           time:{
-            type:Date,
-            required:true,
-           }
+    players: {
+        player: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
+        },
+        score: {
+            type: Number,
+            required: true,
+        },
+        position: {
+            type: Number,
+            required: true,
+        },
+        time: {
+            type: Date,
+            required: true,
         }
-    ]
+    }
+
 }, {
     versionKey: false
 });
-module.exports=model('results',resultSchema);
+module.exports = model('results', resultSchema);
