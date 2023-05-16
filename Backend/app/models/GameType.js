@@ -4,11 +4,11 @@ const model = mongoose.model;
 const gameTypeSchema = new Schema({
     code: {
         type: String,
-        require:true,
+        required:true,
     },
     name: {
         type: String,
-        require:true,
+        required:true,
     },
     description: {
          type: String

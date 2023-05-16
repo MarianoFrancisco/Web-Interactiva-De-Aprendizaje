@@ -5,24 +5,28 @@ const resultSchema = new Schema({
     game_id: {
         type: Schema.Types.ObjectId,
         ref:"GameType",
-        require:true,
+        required:true,
     },
-    username: {
-        type: String,
-        require:true,
-    },
-    password: {
-         type: String,
-         require:true,
-    },
-    fullname: {
-        type: String,
-        require:true,
-    },
-    datebirth: {
-        type: DATE,
-        require:true,
-    }
+    players:[
+        {
+           id:{
+            type:String,
+            required:true,
+           },
+           score:{
+            type:Number,
+            required:true,
+           },
+           position:{
+            type:Number,
+            required:true,
+           },
+           time:{
+            type:Date,
+            required:true,
+           }
+        }
+    ]
 }, {
     versionKey: false
 });
