@@ -21,7 +21,7 @@ const gameSchema = new Schema({
         required: true,
     },
     time: {
-        type: Date
+        type: String
     },
     data_game: {
         ahorcado: {
