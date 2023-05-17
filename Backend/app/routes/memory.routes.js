@@ -6,8 +6,8 @@ const ROLES_LIST = require('../../config/roles_list');
 
 const routes = express.Router();
 routes.post('/add-game', verifyJWT, verifyRoles(ROLES_LIST.Teacher), insertGame);
-routes.get('/view-game/:id', getGame);
-routes.patch('/edit-game', editGame);
-routes.delete('/delete-game/:id', deleteGame);
+routes.get('/view-game/:id', verifyJWT, verifyRoles(ROLES_LIST.Teacher), getGame);
+routes.patch('/edit-game', verifyJWT, verifyRoles(ROLES_LIST.Teacher), editGame);
+routes.delete('/delete-game/:id', verifyJWT, verifyRoles(ROLES_LIST.Teacher), deleteGame);
 
 module.exports = routes;
