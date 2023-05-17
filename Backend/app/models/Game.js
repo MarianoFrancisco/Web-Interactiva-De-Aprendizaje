@@ -24,7 +24,7 @@ const gameSchema = new Schema({
         type: String
     },
     data_game: {
-        ahorcado: {
+        hangman: {
             type: Schema.Types.ObjectId,
             ref: "Ahorcado"
         },
