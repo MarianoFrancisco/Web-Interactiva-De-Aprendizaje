@@ -32,8 +32,6 @@ const handleLogin = async (req, res) => {
         // Saving refreshToken with current user
         foundUser.refreshToken = refreshToken;
         const result = await foundUser.save();
-        console.log(result);
-        console.log(roles);
 
         // Creates Secure Cookie with refresh token
         res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 }); //secure: true add in production
@@ -63,7 +61,6 @@ const handleLogout = async (req, res) => {
     // Delete refreshToken in db
     foundUser.refreshToken = '';
     const result = await foundUser.save();
-    console.log(result);
 
     res.clearCookie('jwt', { httpOnly: true, sameSite: 'None' }); //secure: true add for production
     res.sendStatus(204);

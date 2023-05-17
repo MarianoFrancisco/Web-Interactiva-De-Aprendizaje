@@ -27,9 +27,7 @@ const createNewUser = async (req, res) => {
             "password": hashedPwd,
             roles,
             birthdayDate
-        });
-
-        console.log(result);
+        });        
 
         res.status(201).json({ 'success': `New user ${username} created!` });
     } catch (err) {
