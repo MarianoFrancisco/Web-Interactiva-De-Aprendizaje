@@ -6,8 +6,8 @@ const insertGame = async (req, res) => {
         const newGame = new LetterSoup({
             data
         });
-        const insertGame = await newGame.save();
-        res.status(200).json( insertGame );
+        const insert = await newGame.save();
+        res.status(200).json( insert );
     } catch (error) {
         res.status(500).json({ error: 'Ocurrio un error interno en el servidor...' })
     }
@@ -29,10 +29,14 @@ const getGame = async (req, res) => {
 
 const editGame = async (req, res) => {
     try {
-        const id_game = req.body.id_game;
+        const id_game = req.params.id;
         const data = req.body.data;
         const game = await LetterSoup.findByIdAndUpdate(id_game, { data });
-        res.status(200).json(game);
+        if (game) {
+            res.status(200).json(game);
+        } else {
+            res.status(404).json({ error: 'Parece que el juego que intentas actualizar no existe...' });
+        }
     } catch (error) {
         res.status(500).json({ error: 'Ocurrio un error interno en el servidor...' })
     }
@@ -43,7 +47,7 @@ const deleteGame = async (req, res) => {
         const id_game = req.params.id;
         const game = await LetterSoup.findByIdAndDelete(id_game);
         if (game) {
-            res.status(200).json(game);
+            res.sendStatus(200);
         } else {
             res.status(404).json({ error: 'Parece que el juego que intentas eliminar no existe...' });
         }
