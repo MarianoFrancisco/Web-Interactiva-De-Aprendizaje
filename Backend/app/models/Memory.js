@@ -15,6 +15,8 @@ const memorySchema = new Schema({
             }
         }
     ]
+}, {
+    versionKey: false
 });
 
 module.exports = model('memories', memorySchema);
