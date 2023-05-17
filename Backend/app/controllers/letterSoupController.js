@@ -1,6 +1,6 @@
 const LetterSoup = require('../models/LetterSoup');
 
-const saveGame = async (req, res) => {
+const insertGame = async (req, res) => {
     try {
         const data = req.body.data;
         const newGame = new LetterSoup({
