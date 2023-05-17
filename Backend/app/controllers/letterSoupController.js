@@ -53,7 +53,7 @@ const deleteGame = async (req, res) => {
 }
 
 module.exports = {
-    saveGame,
+    insertGame,
     getGame,
     editGame,
     deleteGame
