@@ -8,7 +8,7 @@ db.createCollection("quizzes");
 db.createCollection("results");
 db.createCollection("users");
 
-db.games.insertMany([
+db.gametypes.insertMany([
   {
     code: 1,
     name: "Memoria",
