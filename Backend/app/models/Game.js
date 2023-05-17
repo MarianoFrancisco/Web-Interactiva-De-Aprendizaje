@@ -13,10 +13,6 @@ const gameSchema = new Schema({
         ref: "GameType",
         required: true,
     },
-    code: {
-        type: String,
-        required: true,
-    },
     description: {
         type: String
     },
