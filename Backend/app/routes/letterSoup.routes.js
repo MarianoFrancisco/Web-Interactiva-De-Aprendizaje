@@ -1,5 +1,5 @@
 const express = require('express');
-const {} = require('../controllers/letterSoupController');
+const { insertGame, getGame, editGame, deleteGame } = require('../controllers/letterSoupController');
 
 const routes = express.Router();
 routes.post('/add-game', verifyJWT, verifyRoles(ROLES_LIST.Teacher), insertGame);
