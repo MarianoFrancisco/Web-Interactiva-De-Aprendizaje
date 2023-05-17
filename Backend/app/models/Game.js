@@ -26,39 +26,19 @@ const gameSchema = new Schema({
     data_game: {
         ahorcado: {
             type: Schema.Types.ObjectId,
-            ref: "Ahorcado",
-            validate: {
-                validator: function(value) {
-                    return this.letter_soup || this.memory || this.quiz;
-                }
-            }
+            ref: "Ahorcado"
         },
         letter_soup: {
             type: Schema.Types.ObjectId,
-            ref: "LetterSoup",
-            validate: {
-                validator: function(value) {
-                    return this.ahorcado || this.memory || this.quiz;
-                }
-            }
+            ref: "LetterSoup"
         },
         memory: {
             type: Schema.Types.ObjectId,
-            ref: "Memory",
-            validate: {
-                validator: function(value) {
-                    return this.ahorcado || this.letter_soup || this.quiz;
-                }
-            }
+            ref: "Memory"
         },
         quiz: {
             type: Schema.Types.ObjectId,
-            ref: "Quiz",
-            validate: {
-                validator: function(value) {
-                    return this.ahorcado || this.letter_soup || this.memory;
-                }
-            }
+            ref: "Quiz"
         }
     }
 }, {
