@@ -10,12 +10,16 @@ const {
   getUser,
   updateUser,
 } = require("../controllers/userController");
+const auth = require("../controllers/authController");
 
 routes
   .route("/")
-  .get([verifyJWT, verifyRoles(ROLES_LIST.Admin)], getAllUsers)
+  .get([verifyJWT, verifyRoles(ROLES_LIST.Student, ROLES_LIST.Admin)], getAllUsers)
   .post(createNewUser)
   .patch(updateUser)
   .delete(deleteUser);
+
+routes.route('/login').post(auth.handleLogin);
+routes.route('/logout').get(auth.handleLogout);
 
 module.exports = routes;
