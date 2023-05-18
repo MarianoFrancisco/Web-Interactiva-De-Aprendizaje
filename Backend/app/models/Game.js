@@ -24,19 +24,19 @@ const gameSchema = new Schema({
         type: String
     },
     data_game: {
-        hangman: {
+        hangmans: {
             type: Schema.Types.ObjectId,
             ref: "Ahorcado"
         },
-        letter_soup: {
+        letter_soups: {
             type: Schema.Types.ObjectId,
             ref: "LetterSoup"
         },
-        memory: {
+        memories: {
             type: Schema.Types.ObjectId,
             ref: "Memory"
         },
-        quiz: {
+        quizzes: {
             type: Schema.Types.ObjectId,
             ref: "Quiz"
         }
