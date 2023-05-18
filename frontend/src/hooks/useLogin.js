@@ -2,13 +2,13 @@ import axios from "../api/axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import useAuth from "../hooks/useAuth";
-const LOGIN_URL = "/login";
+const LOGIN_URL = "/user/login";
 
 const useLogin = () => {
   const { setAuth, persist, setPersist } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/test";
 
   const handleLogin = async (username, password) => {
     try {
@@ -24,19 +24,20 @@ const useLogin = () => {
       //console.log(JSON.stringify(response));
       const accessToken = response?.data?.accessToken;
       const roles = response?.data?.roles;
-      setAuth({ username, password, roles, accessToken });
+      const fullname = response?.data?.fullname;
+      setAuth({ username, password, fullname, roles, accessToken });
       navigate(from, { replace: true });
     } catch (err) {
       if (!err?.response) {
-        setErrMsg("No Server Response");
+        console.log("No Server Response");
       } else if (err.response?.status === 400) {
-        setErrMsg("Missing Username or Password");
+        console.log("Missing Username or Password");
       } else if (err.response?.status === 401) {
-        setErrMsg("Unauthorized");
+        console.log("Unauthorized");
       } else {
-        setErrMsg("Login Failed");
+        console.log("Login Failed");
       }
-      errRef.current.focus();
+      // errRef.current.focus();
     }
   };
 

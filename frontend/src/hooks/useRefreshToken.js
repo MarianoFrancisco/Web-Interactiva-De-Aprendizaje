@@ -5,7 +5,7 @@ const useRefreshToken = () => {
     const { setAuth } = useAuth();
 
     const refresh = async () => {
-        const response = await axios.get('/refresh', {
+        const response = await axios.get('/user/refresh', {
             withCredentials: true
         });
         setAuth(prev => {
@@ -13,6 +13,8 @@ const useRefreshToken = () => {
             console.log(response.data.accessToken);
             return {
                 ...prev,
+                username: response.data.username,
+                fullname: response.data.fullname,
                 roles: response.data.roles,
                 accessToken: response.data.accessToken
             }

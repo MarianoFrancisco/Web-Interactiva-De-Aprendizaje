@@ -5,7 +5,8 @@ import Missing from "./components/Missing";
 import RequireAuth from "./components/RequireAuth";
 import { Routes, Route } from "react-router-dom";
 import NavBarLayout from "./layouts/NavBar";
-import PersistLogin from './components/PersistLogin';
+import PersistLogin from "./components/PersistLogin";
+import IndexCustom from "./pages/IndexCustom";
 
 export const ROLES = {
   Student: 2000,
@@ -22,6 +23,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route element={<PersistLogin />}>
           <Route element={<NavBarLayout />}>
+          <Route path="/test" element={<IndexCustom />} />
             {/* 
           <Route path="/product/:id" element={<ProductOverview />} />
           <Route path="/unauthorized" element={<Unauthorized />} /> */}
