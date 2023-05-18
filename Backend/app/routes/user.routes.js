@@ -22,4 +22,6 @@ routes
 routes.route('/login').post(auth.handleLogin);
 routes.route('/logout').get(auth.handleLogout);
 
+routes.get('/refresh', auth.handleRefreshToken);
 module.exports = routes;
+

@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const handleLogin = async (req, res) => {
+    console.log(req.body);
     const { username, password } = req.body;
     if (!username || !password) return res.status(400).json({ 'message': 'Username and password are required.' });
 
@@ -34,7 +35,7 @@ const handleLogin = async (req, res) => {
         const result = await foundUser.save();
 
         // Creates Secure Cookie with refresh token
-        res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 }); //secure: true add in production
+        res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 }); //secure: true add in production
 
         // Send authorization roles and access token to user
         res.json({ roles, accessToken, fullname: foundUser.fullname });
@@ -66,4 +67,34 @@ const handleLogout = async (req, res) => {
     res.sendStatus(204);
 }
 
-module.exports = { handleLogin, handleLogout };
+const handleRefreshToken = async (req, res) => {
+    const cookies = req.cookies;
+    if (!cookies?.jwt) return res.sendStatus(401);
+    const refreshToken = cookies.jwt;
+
+    const foundUser = await User.findOne({ refreshToken }).exec();
+    if (!foundUser) return res.sendStatus(403); //Forbidden 
+    // evaluate jwt 
+    jwt.verify(
+        refreshToken,
+        process.env.REFRESH_TOKEN_SECRET,
+        (err, decoded) => {
+            if (err || foundUser.username !== decoded.username) return res.sendStatus(403);
+            const roles = Object.values(foundUser.roles);
+            const accessToken = jwt.sign(
+                {
+                    "UserInfo": {
+                        "username": decoded.username,
+                        "roles": roles,
+                        "id": foundUser._id
+                    }
+                },
+                process.env.ACCESS_TOKEN_SECRET,
+                { expiresIn: '15m' }
+            );
+            res.json({ roles, accessToken, fullname: foundUser.fullname, username: foundUser.username });
+        }
+    );
+}
+
+module.exports = { handleLogin, handleLogout, handleRefreshToken };

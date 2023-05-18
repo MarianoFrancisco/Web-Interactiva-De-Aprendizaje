@@ -12,13 +12,16 @@ const app = express();
 const body_parser = require("body-parser");
 const routes = require("./app/routes/index");
 const morgan = require("morgan");
+const credentials = require("./app/middleware/credentials");
+const corsOptions = require("./config/corsOptions");
 
 const PUERTO = process.env.PUERTO || 5000;
 app.use(morgan('dev'));
 //Hacer uso de cors y permitir los json
 app.use(express.json());
 app.use(body_parser.json());
-app.use(cors());
+app.use(credentials);
+app.use(cors(corsOptions));
 //middleware for cookies
 app.use(cookieParser());
 app.use("/api/v1.0", routes);
