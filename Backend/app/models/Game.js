@@ -24,21 +24,9 @@ const gameSchema = new Schema({
         type: String
     },
     data_game: {
-        hangmans: {
+        details: {
             type: Schema.Types.ObjectId,
-            ref: "Ahorcado"
-        },
-        letter_soups: {
-            type: Schema.Types.ObjectId,
-            ref: "LetterSoup"
-        },
-        memories: {
-            type: Schema.Types.ObjectId,
-            ref: "Memory"
-        },
-        quizzes: {
-            type: Schema.Types.ObjectId,
-            ref: "Quiz"
+            ref: "Detail"
         }
     }
 }, {

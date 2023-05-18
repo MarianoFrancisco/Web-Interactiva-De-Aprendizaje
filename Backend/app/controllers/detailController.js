@@ -1,24 +1,24 @@
-const Memory = require('../models/Memory');
+const Detail = require('../models/Detail');
 
-const insertGame = async (req, res) => {
+const insertDetail = async (req, res) => {
     try {
         const data = req.body.data;
-        const newGame = new Memory({
+        const newDetail = new Detail({
             data
         });
-        const insert = await newGame.save();
+        const insert = await newDetail.save();
         res.status(200).json( insert );
     } catch (error) {
         res.status(500).json({ error: 'Ocurrio un error interno en el servidor...' });
     }
 }
 
-const getGame = async (req, res) => {
+const getDetail = async (req, res) => {
     try {
-        const id_game = req.params.id;
-        const game = await Memory.findById(id_game);
-        if (game) {
-            res.status(200).json(game);
+        const id_Detail = req.params.id;
+        const Detail = await Detail.findById(id_Detail);
+        if (Detail) {
+            res.status(200).json(Detail);
         } else {
             res.status(400).json({ error: "Parece que el juego de memoria no existe..." });
         }
@@ -27,13 +27,13 @@ const getGame = async (req, res) => {
     }
 }
 
-const editGame = async (req, res) => {
+const editDetail = async (req, res) => {
     try {
-        const id_game = req.params.id;
+        const id_Detail = req.params.id;
         const data = req.body.data;
-        const game = await Memory.findByIdAndUpdate(id_game, { data });
-        if (game) {
-            res.status(200).json(game);
+        const Detail = await Detail.findByIdAndUpdate(id_Detail, { data });
+        if (Detail) {
+            res.status(200).json(Detail);
         } else {
             res.status(404).json({ error: 'Parece que el juego que intentas actualizar no existe...' });
         }
@@ -42,11 +42,11 @@ const editGame = async (req, res) => {
     }
 }
 
-const deleteGame = async (req, res) => {
+const deleteDetail = async (req, res) => {
     try {
-        const id_game = req.params.id;
-        const game = await Memory.findByIdAndDelete(id_game);
-        if (game) {
+        const id_Detail = req.params.id;
+        const Detail = await Detail.findByIdAndDelete(id_Detail);
+        if (Detail) {
             res.sendStatus(200);
         } else {
             res.status(404).json({ error: 'Parece que el juego que intentas eliminar no existe...' });
@@ -57,8 +57,8 @@ const deleteGame = async (req, res) => {
 }
 
 module.exports = {
-    insertGame,
-    getGame,
-    editGame,
-    deleteGame
+    insertDetail,
+    getDetail,
+    editDetail,
+    deleteDetail
 }
