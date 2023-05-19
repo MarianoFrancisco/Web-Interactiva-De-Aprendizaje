@@ -15,6 +15,34 @@ const insertResult = async (req, res) => {
     }
 }
 
+const getResultsForGame = async (req, res) => {
+    try {
+        const id_game = req.params.id;
+        const results = await Result.find({ game_id });
+        if (results.length > 0) {
+            res.status(200).json( results );
+        } else {
+            res.status(404).jason({ message: 'No se encontraron resultados de este juego...' })
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Ocurrio un error interno en el servidor...' });
+    }
+}
+
+const getResultsByUser = async (req, res) => {
+    try {
+        const id_player = req.params.id;
+        const results = await Result.find({ 'players.player': id_player });
+        if (results.length > 0) {
+            res.status(200).json(results);
+        } else {
+            res.status(404).json({ message: 'No cuentas con resultados aun...' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Ocurrio un error interno en el servidor...' });
+    }
+}
+
 const deleteResult = async (req, res, next) => {
     try {
         const game_id = req.params.id;
@@ -27,5 +55,7 @@ const deleteResult = async (req, res, next) => {
 
 module.exports = {
     insertResult,
+    getResultsForGame,
+    getResultsByUser,
     deleteResult
 }
