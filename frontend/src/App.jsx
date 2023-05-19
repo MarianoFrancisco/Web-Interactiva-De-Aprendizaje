@@ -23,7 +23,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route element={<PersistLogin />}>
           <Route element={<NavBarLayout />}>
-          <Route path="/test" element={<IndexCustom />} />
+          <Route path="/" element={<IndexCustom />} />
             {/* 
           <Route path="/product/:id" element={<ProductOverview />} />
           <Route path="/unauthorized" element={<Unauthorized />} /> */}

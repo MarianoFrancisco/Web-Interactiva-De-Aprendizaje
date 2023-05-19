@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxiosPrivate from "./useAxiosPrivate";
+import axios from "../api/axios";
 
 const USERS_URL = "/user";
 const useUsers = () => {
@@ -14,8 +15,11 @@ const useUsers = () => {
   };
 
   const createNewUser = (user) => {
-    axiosPrivate
-      .post(USERS_URL, user)
+    axios
+      .post(USERS_URL, user, {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      })
       .then((res) => {
         getAllUsers();
         return res.data;

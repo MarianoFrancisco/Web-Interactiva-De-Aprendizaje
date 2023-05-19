@@ -14,7 +14,7 @@ const auth = require("../controllers/authController");
 
 routes
   .route("/")
-  .get([verifyJWT, verifyRoles(ROLES_LIST.Admin)], getAllUsers)
+  .get(getAllUsers)
   .post(createNewUser)
   .patch([verifyJWT, verifyRoles(ROLES_LIST.Admin)], updateUser)
   .delete([verifyJWT, verifyRoles(ROLES_LIST.Admin)], deleteUser);
