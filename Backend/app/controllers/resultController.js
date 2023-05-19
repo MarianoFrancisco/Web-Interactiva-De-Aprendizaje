@@ -1,3 +1,4 @@
+const { mongo, default: mongoose } = require('mongoose');
 const Result = require('../models/Result');
 
 const insertResult = async (req, res) => {
@@ -14,15 +15,11 @@ const insertResult = async (req, res) => {
     }
 }
 
-const deleteResult = async (req, res) => {
+const deleteResult = async (req, res, next) => {
     try {
-        const id_result = req.params.id;
-        const result = await Result.findByIdAndDelete(id_result);
-        if (result) {
-            res.sendStatus(200);
-        } else {
-            res.status(404).json({ error: 'El resultado que intentas eliminar no existe...' });
-        }
+        const game_id = req.params.id;
+        const deleteResults = await Result.deleteMany({ game_id });
+        next();
     } catch (error) {
         res.status(500).json({ error: 'Ocurrio un error interno en el servidor...' });
     }
