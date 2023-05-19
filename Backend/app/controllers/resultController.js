@@ -17,7 +17,7 @@ const insertResult = async (req, res) => {
 
 const getResultsForGame = async (req, res) => {
     try {
-        const id_game = req.params.id;
+        const game_id = req.params.id;
         const results = await Result.find({ game_id });
         if (results.length > 0) {
             res.status(200).json( results );
