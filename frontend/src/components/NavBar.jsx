@@ -5,6 +5,7 @@ import { faBars, faUser, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthProvider";
 import { ROLES } from "../App";
+import useLogout from "../hooks/useLogout";
 
 let navigation = [];
 
@@ -14,6 +15,7 @@ function classNames(...classes) {
 
 export default function NavBar() {
   const { auth, setAuth } = useContext(AuthContext);
+  const {logoutFunction} = useLogout();
   const navigate = useNavigate();
   if (auth?.roles?.includes(ROLES.Admin)) {
     navigation = []
@@ -55,9 +57,7 @@ export default function NavBar() {
   }
 
   const logout = async () => {
-    // if used in more components, this should be in context
-    // axios to /logout endpoint
-    setAuth({});
+    
     navigate("/");
     navigation = []
   };
