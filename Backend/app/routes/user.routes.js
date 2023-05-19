@@ -14,14 +14,13 @@ const auth = require("../controllers/authController");
 
 routes
   .route("/")
-  .get([verifyJWT, verifyRoles(ROLES_LIST.Student, ROLES_LIST.Admin)], getAllUsers)
+  .get([verifyJWT, verifyRoles(ROLES_LIST.Admin)], getAllUsers)
   .post(createNewUser)
-  .patch(updateUser)
-  .delete(deleteUser);
+  .patch([verifyJWT, verifyRoles(ROLES_LIST.Admin)], updateUser)
+  .delete([verifyJWT, verifyRoles(ROLES_LIST.Admin)], deleteUser);
 
-routes.route('/login').post(auth.handleLogin);
-routes.route('/logout').get(auth.handleLogout);
+routes.route("/login").post(auth.handleLogin);
+routes.route("/logout").get(auth.handleLogout);
 
-routes.get('/refresh', auth.handleRefreshToken);
+routes.get("/refresh", auth.handleRefreshToken);
 module.exports = routes;
-
