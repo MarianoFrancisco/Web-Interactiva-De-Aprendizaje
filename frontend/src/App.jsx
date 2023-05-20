@@ -7,6 +7,7 @@ import { Routes, Route } from "react-router-dom";
 import NavBarLayout from "./layouts/NavBar";
 import PersistLogin from "./components/PersistLogin";
 import IndexCustom from "./pages/IndexCustom";
+import GameTypeList from "./components/GameTypeList";
 
 export const ROLES = {
   Student: 2000,
@@ -20,6 +21,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         {/* public routes */}
         <Route path="/login" element={<Login />} />
+        <Route path="/game-types" element={<GameTypeList />} />
         <Route path="/register" element={<Register />} />
         <Route element={<PersistLogin />}>
           <Route element={<NavBarLayout />}>
