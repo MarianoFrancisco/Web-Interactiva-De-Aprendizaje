@@ -24,8 +24,7 @@ const resultSchema = new Schema({
                 required: true,
             },
             time: {
-                type: Date,
-                required: true,
+                type: String
             }
         }
     ]
