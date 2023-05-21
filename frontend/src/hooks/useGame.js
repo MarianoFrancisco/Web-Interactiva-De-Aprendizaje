@@ -21,10 +21,7 @@ const useGames = () => {
 
   const updateGame = (id, game) => {
     axiosPrivate
-      .patch(`${GAME_URL}/update-game/${id}`, game, {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      })
+      .patch(`${GAME_URL}/update-game/${id}`, game)
       .then((res) => {
         return res.data;
       })
@@ -35,15 +32,23 @@ const useGames = () => {
 
   const getGamesByUser = (id) => {
     axiosPrivate
-      .get(`${GAME_URL}/getByUser/${id}`, {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      })
+      .get(`${GAME_URL}/getByUser/${id}`)
       .then((res) => setGames(res.data))
       .catch((err) => {
         console.log(err);
       });
   };
+
+  const deleteGame = (id) => {
+    axiosPrivate
+      .delete(`${GAME_URL}/delete-game/${id}`)
+      .then((res) => {
+        getGamesByUser(id)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   useEffect(() => {
     getGamesByUser();
@@ -54,6 +59,7 @@ const useGames = () => {
     insertGame,
     updateGame,
     getGamesByUser,
+    deleteGame
   };
 };
 
