@@ -2,9 +2,12 @@ import { useEffect } from 'react';
 import useAxiosPrivate from "./useAxiosPrivate";
 
 const DETAIL_URL = '/detail';
+
 const useDetails = () => {
+
     const axiosPrivate = useAxiosPrivate();
     const [details, setDetails] = useState([]);
+    
     const getDetail = (id) => {
         axiosPrivate
             .get(`${DETAIL_URL}/view-detail/${id}`)
@@ -26,18 +29,6 @@ const useDetails = () => {
             });
     };
 
-    const deleteDetail = (id) => {
-        axiosPrivate
-            .delete(`${DETAIL_URL}/delete-detail/${id}`)
-            .then((res) => {
-                getDetail();
-                return res.data;
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
-
     useEffect(() => {
         getDetail();
     }, []);
@@ -45,8 +36,7 @@ const useDetails = () => {
     return {
         details,
         getDetail,
-        editDetail,
-        deleteDetail,
+        editDetail
     };
 };
 
