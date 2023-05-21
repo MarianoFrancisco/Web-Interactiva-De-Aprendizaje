@@ -24,6 +24,7 @@ export default function GameForm({ edit = {} }) {
     name: type.name,
     value: type._id,
   }));
+  const [showDetail, setShowDetail] = useState(false);
   const [gameType, setGameType] = useState({ name: "Selecciona" });
   const navigate = useNavigate();
   const onSubmit = async (data) => {
@@ -31,6 +32,9 @@ export default function GameForm({ edit = {} }) {
     const insertedGame = await insertGame(data);
     console.log(insertedGame._id);
   };
+  if (showDetail) {
+    
+  }
   return (
     <>
       <section className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">

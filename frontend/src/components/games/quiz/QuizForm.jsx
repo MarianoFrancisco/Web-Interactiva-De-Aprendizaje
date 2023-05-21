@@ -2,30 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../form/Input";
 import Button from "../../form/Button";
-import GameForm from "../GameForm";
-const QUESTIONS = [
-  {
-    question: 'question 1',
-    answers: [
-      {
-        description: 'a1',
-        isCorrect: true
-      },
-      {
-        description: 'a1',
-        isCorrect: false
-      },
-      {
-        description: 'a1',
-        isCorrect: false
-      },
-      {
-        description: 'a1',
-        isCorrect: false
-      }
-    ]
-  }
-]
+
 export default function QuizForm() {
   const {
     register,
