@@ -188,3 +188,7 @@
 //     </>
 //   );
 // }
+
+export default function GameDetail(){
+  return <p>test</p>
+};
