@@ -21,7 +21,7 @@ const gameSchema = new Schema({
         required: true,
     },
     time: {
-        type: String
+        type: Number
     },
     data_game: {
         details: {

@@ -2,15 +2,15 @@ const { default: mongoose } = require('mongoose');
 const Game = require('../models/Game');
 
 const insertGame = async (req, res) => {
+    console.log('insertando game')
     try {
-        const { user, game_type, description, name, time, data_game } = req.body;
+        const { game_type, description, name, time = 5000 } = req.body;
         const newGame = new Game({
-            user,
+            user: req.userId,
             game_type,
             description,
             name,
-            time,
-            data_game
+            time
         });
         const insert = await newGame.save();
         res.status(200).json( insert );
