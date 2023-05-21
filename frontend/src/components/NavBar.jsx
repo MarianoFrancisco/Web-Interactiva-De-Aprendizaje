@@ -1,6 +1,6 @@
 import { Fragment, useContext } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faUser, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthProvider";
@@ -15,51 +15,56 @@ function classNames(...classes) {
 
 export default function NavBar() {
   const { auth, setAuth } = useContext(AuthContext);
-  const {logoutFunction} = useLogout();
+  const logout = useLogout();
   const navigate = useNavigate();
   if (auth?.roles?.includes(ROLES.Admin)) {
-    navigation = []
+    navigation = [];
     navigation.push(
       { name: "Crear Usuario", href: "/new-employee", current: false },
       { name: "Usuarios", href: "/users", current: false },
-      { name: "Reportes", href: "#", current: false },
+      { name: "Reportes", href: "#", current: false }
     );
-  }else
-  if (auth?.roles?.includes(ROLES.Delivery)) {
-    navigation = []
+  } else if (auth?.roles?.includes(ROLES.Delivery)) {
+    navigation = [];
     // Opción adicional para el rol de entrega
-    navigation.push({
-      name: "Productos",
-      href: "/",
-      current: false,
-    }, {
-      name: "Pedidos",
-      href: "/orders",
-      current: false,
-    });
-  }else
-  if (auth?.roles?.includes(ROLES.User)) {
-    navigation = []
+    navigation.push(
+      {
+        name: "Productos",
+        href: "/",
+        current: false,
+      },
+      {
+        name: "Pedidos",
+        href: "/orders",
+        current: false,
+      }
+    );
+  } else if (auth?.roles?.includes(ROLES.User)) {
+    navigation = [];
     // Opción adicional para el rol de entrega
-    navigation.push({
-      name: "Nuevo Producto",
-      href: "/product-form",
-      current: false,
-    },{
-      name: "Mis Productos",
-      href: "/profile/products",
-      current: false,
-    }, {
-      name: "Mis Pedidos",
-      href: "/orders",
-      current: false,
-    });
+    navigation.push(
+      {
+        name: "Nuevo Producto",
+        href: "/product-form",
+        current: false,
+      },
+      {
+        name: "Mis Productos",
+        href: "/profile/products",
+        current: false,
+      },
+      {
+        name: "Mis Pedidos",
+        href: "/orders",
+        current: false,
+      }
+    );
   }
 
-  const logout = async () => {
-    
+  const signOut = async () => {
+    await logout();
     navigate("/");
-    navigation = []
+    navigation = [];
   };
   return (
     <Disclosure as="nav" className="bg-emerald-600">
@@ -73,7 +78,7 @@ export default function NavBar() {
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     // <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                    <FontAwesomeIcon icon={faXmark} className="block h-6 w-6"/>
+                    <FontAwesomeIcon icon={faXmark} className="block h-6 w-6" />
                   ) : (
                     // <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                     <FontAwesomeIcon icon={faBars} className="block h-6 w-6" />
@@ -123,7 +128,10 @@ export default function NavBar() {
                     <Menu.Button className="flex rounded-full bg-emerald-600 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-emerald-600">
                       <span className="sr-only">Open user menu</span>
                       {/* <UserCircleIcon className="w-7 flex-shrink-0 text-white" /> */}
-                      <FontAwesomeIcon icon={faUser} className="h-6 w-6 flex-shrink-0 text-white" />
+                      <FontAwesomeIcon
+                        icon={faUser}
+                        className="h-6 w-6 flex-shrink-0 text-white"
+                      />
                     </Menu.Button>
                   </div>
                   <Transition
@@ -156,15 +164,15 @@ export default function NavBar() {
                           </Menu.Item>
                           <Menu.Item>
                             {({ active }) => (
-                              <a
-                                onClick={logout}
+                              <button
+                                onClick={signOut}
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700"
+                                  "w-full text-left block px-4 py-2 text-sm text-gray-700"
                                 )}
                               >
                                 Cerrar sesión
-                              </a>
+                              </button>
                             )}
                           </Menu.Item>
                         </>

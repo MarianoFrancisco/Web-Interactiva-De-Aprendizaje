@@ -8,7 +8,7 @@ const useLogin = () => {
   const { setAuth, persist, setPersist } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/test";
+  const from = location.state?.from?.pathname || "/";
 
   const handleLogin = async (username, password) => {
     try {
@@ -31,7 +31,7 @@ const useLogin = () => {
       } else if (err.response?.status === 400) {
         throw "Username o contraseña incorrectos";
       } else if (err.response?.status === 401) {
-        throw "No autorizado";
+        throw "Username o contraseña incorrectos";
       } else {
         throw "Login Failed";
       }

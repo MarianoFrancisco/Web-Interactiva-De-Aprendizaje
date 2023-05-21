@@ -1,13 +1,17 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "./form/Input";
 import Button from "./form/Button";
 import useUsers from "../hooks/useUsers";
 import Select from "./form/Select";
+import { useState } from "react";
+import { ROLES } from "../App";
+import { differenceInYears } from "date-fns";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{3,24}$/;
 const FULLNAME_REGEX = /^(\S+\s\S+)(\s\S+)*$/;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const Register = ({
   admin = false,
@@ -26,18 +30,51 @@ const Register = ({
     reset,
     formState: { errors },
     setError,
+    watch,
   } = useForm();
+  const roles = [
+    {
+      name: "Estudiante",
+      value: { Student: ROLES.Student },
+    },
+    {
+      name: "Profesor",
+      value: { Teacher: ROLES.Teacher },
+    },
+  ];
+  const [rol, setRol] = useState(roles[0]);
 
   const { createNewUser } = useUsers();
+  const navigate = useNavigate();
+
+  if (admin) {
+    roles.push({
+      name: "Administrador",
+      value: { Admin: ROLES.Admin },
+    });
+  }
+  const validatePasswordMatch = (value) => {
+    const password = watch("pwd", "");
+    return value === password || "Las contraseñas no coinciden";
+  };
+
+  const validateBirthday = (value) => {
+    const today = new Date();
+    const birthday = new Date(value);
+    const age = differenceInYears(today, birthday);
+    return age >= 5 || "Debes tener al menos 5 años de edad";
+  };
 
   const onSubmit = (data) => {
-    console.log(data);
-    reset()
+    data.roles = rol.value;
+    data.password = data.pwd;
+    createNewUser(data);
+    reset();
+    navigate("/login");
   };
 
   return (
     <>
-      (
       <section className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -83,7 +120,26 @@ const Register = ({
                     />
                   </div>
 
-                  <div className="sm:col-span-3">
+                  <div className="col-span-full">
+                    <Input
+                      label="Correo electónico"
+                      type="text"
+                      errors={errors}
+                      id="email"
+                      register={register("email", {
+                        required: {
+                          value: true,
+                          message: "Debes ingresar tu email",
+                        },
+                        pattern: {
+                          value: EMAIL_REGEX,
+                          message: "Ingresa un email valido",
+                        },
+                      })}
+                    />
+                  </div>
+
+                  <div className="col-span-full">
                     <Input
                       label="Usuario"
                       type="text"
@@ -104,6 +160,22 @@ const Register = ({
                     />
                   </div>
                   <div className="sm:col-span-3">
+                    <Input
+                      label="Fecha de nacimiento"
+                      type="date"
+                      errors={errors}
+                      id="birthdayDate"
+                      register={register("birthdayDate", {
+                        required: {
+                          value: true,
+                          message:
+                            "Debes ingresar tu fecha de nacimiento para registrarte",
+                        },
+                        validate: validateBirthday,
+                      })}
+                    />
+                  </div>
+                  <div className="sm:col-span-3">
                     <label
                       htmlFor="rol"
                       className="block text-sm font-medium leading-6 text-gray-900"
@@ -111,13 +183,11 @@ const Register = ({
                       ¿Qué eres?
                     </label>
                     <div className="mt-2">
-                      <Select data={[{
-                        name: 'opcion1',
-                        value: 1
-                      },{
-                        name: 'opcion2',
-                        value: 2
-                      }]}/>
+                      <Select
+                        data={roles}
+                        selected={rol}
+                        setSelected={setRol}
+                      />
                     </div>
                   </div>
 
@@ -154,6 +224,7 @@ const Register = ({
                           message:
                             "Debes confirmar tu contraseña para registrarte",
                         },
+                        validate: validatePasswordMatch,
                       })}
                     />
                   </div>
@@ -178,7 +249,6 @@ const Register = ({
           )}
         </div>
       </section>
-      )
     </>
   );
 };

@@ -8,6 +8,7 @@ const getAllUsers = async (req, res) => {
 }
 
 const createNewUser = async (req, res) => {
+    console.log(req.body)
     const { username, password, fullname, roles, email, birthdayDate } = req.body;
     if (!username || !password || !fullname || !roles || !email || !birthdayDate) return res.status(400).json({ 'message': 'Username, password and fullname are required.' });
 

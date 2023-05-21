@@ -15,10 +15,7 @@ const userSchema = new Schema({
     required: true,
   },
   roles: {
-    Student: {
-      type: Number,
-      default: 2000,
-    },
+    Student: Number,
     Teacher: Number,
     Admin: Number,
   },
