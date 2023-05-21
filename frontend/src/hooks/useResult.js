@@ -38,18 +38,6 @@ const useResult = () => {
             });
     };
 
-    const deleteResult = async (id) => {
-        axiosPrivate
-            .delete(`${RESULT_URL}/delete-result/${id}`)
-            .then((res) => {
-                getResultsForGame();
-                return res.data;
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
-
     useEffect(() => {
         getResultsForGame();
         getResultsByUser();
@@ -60,8 +48,7 @@ const useResult = () => {
         resultsByUser,
         insertResult,
         getResultsForGame,
-        getResultsByUser,
-        deleteResult,
+        getResultsByUser
     };
 };
 
