@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import Input from "../../form/Input";
 import Button from "../../form/Button";
 
-export default function QuizForm() {
+export default function HangmanForm() {
   const {
     register,
     handleSubmit,
@@ -26,7 +26,7 @@ export default function QuizForm() {
             <div className="space-y-12">
               <div>
                 <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                  Detalle de Quiz
+                  Detalle de Ahorcado
                 </h2>
 
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-8">

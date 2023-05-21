@@ -9,6 +9,9 @@ import PersistLogin from "./components/PersistLogin";
 import GameForm from "./components/games/GameForm";
 import GameDetail from "./components/games/GameDetail";
 import QuizForm from "./components/games/quiz/QuizForm";
+import HangmanForm from "./components/games/hangman/HangmanForm";
+import MemoryForm from "./components/games/memory/MemoryForm";
+import LetterSoupForm from "./components/games/letterSoup/LetterSoupForm";
 
 export const ROLES = {
   Student: 2000,
@@ -46,6 +49,10 @@ function App() {
               <Route path="/new-game" element={<GameForm />} />
               <Route path="/game-detail/:id" element={<GameDetail />} />
               <Route path="/quiz-form" element={<QuizForm />} />
+              <Route path="/hangman-form" element={<HangmanForm />} />
+              <Route path="/memory-form" element={<MemoryForm />} />
+              <Route path="/letterSoup-form" element={<LetterSoupForm />} />
+
               {/* <Route path="/orders" element={<OrderList />} /> */}
             </Route>
 
