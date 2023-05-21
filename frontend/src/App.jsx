@@ -8,6 +8,7 @@ import NavBarLayout from "./layouts/NavBar";
 import PersistLogin from "./components/PersistLogin";
 import GameForm from "./components/games/GameForm";
 import GameDetail from "./components/games/GameDetail";
+import QuizForm from "./components/games/quiz/QuizForm";
 
 export const ROLES = {
   Student: 2000,
@@ -44,6 +45,7 @@ function App() {
             >
               <Route path="/new-game" element={<GameForm />} />
               <Route path="/game-detail/:id" element={<GameDetail />} />
+              <Route path="/quiz-form" element={<QuizForm />} />
               {/* <Route path="/orders" element={<OrderList />} /> */}
             </Route>
 
