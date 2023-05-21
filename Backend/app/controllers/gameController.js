@@ -123,9 +123,32 @@ const deleteGame = async (req, res, next) => {
     }
 }
 
+const updateGame = async (req, res) => {
+    if (!req?.body?.id) {
+      return res.status(400).json({ message: "ID parameter is required." });
+    }
+    const game = await Game.findById(req.body.id).exec();
+    if (!game) {
+      return res
+        .status(204)
+        .json({ message: `No game matches ID ${req.body.id}.` });
+    }
+    try {
+      if (req.body?.name) game.name = req.body.name;
+      if (req.body?.description) game.description = req.body.description;
+      if (req.body?.time) game.time = req.body.time;
+      if (req.body?.data) game.data = req.body.data;
+      const result = await game.save();
+      res.json(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 module.exports = {
     insertGame,
     getGamesByUser,
     deleteGame,
-    getGame
+    getGame,
+    updateGame
 }

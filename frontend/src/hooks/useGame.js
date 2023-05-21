@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import axios from "../api/axios";
 import useAxiosPrivate from "./useAxiosPrivate";
 
 const GAME_URL = "/game";
@@ -7,6 +6,15 @@ const GAME_URL = "/game";
 const useGames = () => {
   const axiosPrivate = useAxiosPrivate();
   const [games, setGames] = useState([]);
+
+  const getGame = async (id) => {
+    return axiosPrivate
+      .get(`${GAME_URL}/${id}`)
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => console.log(err));
+  };
 
   const insertGame = async (game) => {
     return axiosPrivate
@@ -19,9 +27,9 @@ const useGames = () => {
       });
   };
 
-  const updateGame = (id, game) => {
-    axiosPrivate
-      .patch(`${GAME_URL}/update-game/${id}`, game)
+  const updateGame = async (game) => {
+    return axiosPrivate
+      .patch(GAME_URL, game)
       .then((res) => {
         return res.data;
       })
@@ -43,15 +51,15 @@ const useGames = () => {
     axiosPrivate
       .delete(`${GAME_URL}/delete-game/${id}`)
       .then((res) => {
-        getGamesByUser(id)
+        getGamesByUser(id);
       })
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   useEffect(() => {
-    getGamesByUser();
+    // getGamesByUser();
   }, []);
 
   return {
@@ -59,7 +67,8 @@ const useGames = () => {
     insertGame,
     updateGame,
     getGamesByUser,
-    deleteGame
+    deleteGame,
+    getGame,
   };
 };
 
