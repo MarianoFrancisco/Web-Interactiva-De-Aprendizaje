@@ -6,7 +6,6 @@ import RequireAuth from "./components/RequireAuth";
 import { Routes, Route } from "react-router-dom";
 import NavBarLayout from "./layouts/NavBar";
 import PersistLogin from "./components/PersistLogin";
-import IndexCustom from "./pages/IndexCustom";
 import GameTypeList from "./components/GameTypeList";
 
 export const ROLES = {
@@ -24,8 +23,7 @@ function App() {
         <Route path="/game-types" element={<GameTypeList />} />
         <Route path="/register" element={<Register />} />
         <Route element={<PersistLogin />}>
-          <Route element={<NavBarLayout />}>
-          <Route path="/" element={<IndexCustom />} />
+          <Route element={<NavBarLayout />}>          
             {/* 
           <Route path="/product/:id" element={<ProductOverview />} />
           <Route path="/unauthorized" element={<Unauthorized />} /> */}
