@@ -10,8 +10,7 @@ const insertDetail = async (req, res, next) => {
         const data_game = {
             details: insert._id
         }
-        req.body.data_game = data_game;
-        next();
+        res.status(200).json(data_game);
     } catch (error) {
         res.status(500).json({ error: 'Ocurrio un error interno en el servidor...' });
     }

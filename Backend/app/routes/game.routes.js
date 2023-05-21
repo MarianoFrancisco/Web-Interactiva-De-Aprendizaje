@@ -14,7 +14,6 @@ routes.post(
   "/add-game",
   verifyJWT,
   verifyRoles(ROLES_LIST.Teacher),
-  insertDetail,
   insertGame
 );
 routes.get(

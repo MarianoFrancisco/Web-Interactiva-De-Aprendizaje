@@ -3,7 +3,7 @@ import useAxiosPrivate from "./useAxiosPrivate";
 
 const DETAIL_URL = '/detail';
 
-const useDetails = () => {
+const useDetails = (gameId) => {
 
     const axiosPrivate = useAxiosPrivate();
     const [details, setDetails] = useState([]);
