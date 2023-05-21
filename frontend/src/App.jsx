@@ -7,6 +7,7 @@ import { Routes, Route } from "react-router-dom";
 import NavBarLayout from "./layouts/NavBar";
 import PersistLogin from "./components/PersistLogin";
 import GameForm from "./components/games/GameForm";
+import GameDetail from "./components/games/GameDetail";
 
 export const ROLES = {
   Student: 2000,
@@ -42,6 +43,7 @@ function App() {
               }
             >
               <Route path="/new-game" element={<GameForm />} />
+              <Route path="/game-detail/:id" element={<GameDetail />} />
               {/* <Route path="/orders" element={<OrderList />} /> */}
             </Route>
 

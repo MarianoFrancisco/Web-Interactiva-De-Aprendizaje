@@ -6,6 +6,7 @@ import useGameTypes from "../../hooks/useGameType";
 import Input from "../form/Input";
 import Select from "../form/Select";
 import Button from "../form/Button";
+import { useNavigate } from "react-router-dom";
 
 export default function GameForm({ edit = {} }) {
   const {
@@ -18,13 +19,13 @@ export default function GameForm({ edit = {} }) {
   } = useForm();
 
   const { insertGame } = useGame();
-  const { gameTypes, isLoading } = useGameTypes();
+  const { gameTypes } = useGameTypes();
   const gameTypesMap = gameTypes.map((type) => ({
     name: type.name,
     value: type._id,
   }));
   const [gameType, setGameType] = useState({ name: "Selecciona" });
-
+  const navigate = useNavigate();
   const onSubmit = async (data) => {
     data.game_type = gameType.value;
     const insertedGame = await insertGame(data);

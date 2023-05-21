@@ -10,7 +10,7 @@ const gameSchema = new Schema({
     },
     game_type: {
         type: Schema.Types.ObjectId,
-        ref: "GameType",
+        ref: "gametypes",
         required: true,
     },
     description: {

@@ -1,8 +1,7 @@
 const { default: mongoose } = require('mongoose');
 const Game = require('../models/Game');
 
-const insertGame = async (req, res) => {
-    console.log('insertando game')
+const insertGame = async (req, res) => {    
     try {
         const { game_type, description, name, time = 5000 } = req.body;
         const newGame = new Game({
@@ -18,6 +17,25 @@ const insertGame = async (req, res) => {
         res.status(500).json({ error: 'Ocurrio un error interno en el servidor...' });
     }
 };
+
+const getGame = async (req, res) => {
+    if (!req?.params?.id)
+      return res.status(400).json({ message: "game ID required" });
+    try {
+      const game = await Game.findById(req.params.id)
+        .populate("game_type", {
+          name: 1,
+        });
+      if (!game) {
+        return res
+          .status(204)
+          .json({ message: `game ID ${req.params.id} not found` });
+      }
+      res.json(game);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 const getGamesByUser = async (req, res) => {
     try {
@@ -108,5 +126,6 @@ const deleteGame = async (req, res, next) => {
 module.exports = {
     insertGame,
     getGamesByUser,
-    deleteGame
+    deleteGame,
+    getGame
 }
