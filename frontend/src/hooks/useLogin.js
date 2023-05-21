@@ -20,8 +20,6 @@ const useLogin = () => {
           withCredentials: true,
         }
       );
-      console.log(JSON.stringify(response?.data));
-      //console.log(JSON.stringify(response));
       const accessToken = response?.data?.accessToken;
       const roles = response?.data?.roles;
       const fullname = response?.data?.fullname;
@@ -29,15 +27,14 @@ const useLogin = () => {
       navigate(from, { replace: true });
     } catch (err) {
       if (!err?.response) {
-        console.log("No Server Response");
+        throw "No Server Response";
       } else if (err.response?.status === 400) {
-        console.log("Missing Username or Password");
+        throw "Username o contraseña incorrectos";
       } else if (err.response?.status === 401) {
-        console.log("Unauthorized");
+        throw "No autorizado";
       } else {
-        console.log("Login Failed");
+        throw "Login Failed";
       }
-      // errRef.current.focus();
     }
   };
 
