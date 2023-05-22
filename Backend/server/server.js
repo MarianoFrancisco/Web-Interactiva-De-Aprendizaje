@@ -19,7 +19,7 @@ io.on('connection', (socket) => {
             claveLobby = Math.floor(Math.random() * (max - min + 1)) + min;
             lobbyUsers = [];
             socket.emit('Clave de Lobby', claveLobby)
-        } 
+        }
     })
 
     socket.on('join', (data) => {
