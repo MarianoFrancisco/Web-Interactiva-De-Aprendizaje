@@ -10,7 +10,7 @@ const lobbyUsers = [];
 let claveLobby = 0;
 
 io.on('connection', (socket) => {
-
+    console.log('Conectado al socket');
     socket.on('auth', (data) => {
         const { rol } = data;
         if (rol === ROLES_LIST.Teacher) {
