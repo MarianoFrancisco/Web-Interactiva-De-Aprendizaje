@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../form/Input";
 import Button from "../../form/Button";
+import GameDetail from "../GameDetail";
+import useDetails from "../../../hooks/useDetail";
+import useGames from "../../../hooks/useGame";
 
-export default function QuizForm() {
+export default function QuizForm({game}) {
   const {
     register,
     handleSubmit,
@@ -12,17 +15,43 @@ export default function QuizForm() {
     setError,
     watch,
   } = useForm();
-
+  const { insertGame } = useGames();
   const [addQuestion, setAddQuestion] = useState(false);
+  const { details, addDetail, clearDetails, removeFromDetails } = useDetails();
 
   const onSubmit = (data) => {
-    console.log(data);
+    const detail = { question: data.question }
+    detail.answers = [];
+    detail.answers.push({ answer: data.answer1 });
+    detail.answers.push({ answer: data.answer2 });
+    if (data.answer3) {
+      detail.answers.push({ answer: data.answer3 });
+    }
+    if (data.answer4) {
+      detail.answers.push({ answer: data.answer4 });
+    }
+    detail.name = data.question;
+    addDetail(detail);
+    reset();
+  };
+  const save = () => {
+    game.data = details
+    insertGame(game);
+    clearDetails();
   };
   return (
     <>
+      <div>
+        <GameDetail
+          clearDetails={clearDetails}
+          details={details}
+          removeFromDetails={removeFromDetails}
+          name="preguntas"
+        />
+      </div>
       <section className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <form method="post" onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="space-y-12">
               <div>
                 <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -99,14 +128,21 @@ export default function QuizForm() {
               </div>
               <div className="space-y-2">
                 <Button
-                  label="Añadir respuestas"
+                  label="Agregar pregunta"
                   type="secondary"
-                  onClick={() => setAddQuestion((prev) => !prev)}
+                  onSubmit={handleSubmit(onSubmit)}
                 />
-                <Button label="Agregar" />
               </div>
             </div>
           </form>
+          <div className="py-2 space-y-2">
+            <Button
+              label="Añadir respuestas"
+              type="secondary"
+              onClick={() => setAddQuestion((prev) => !prev)}
+            />
+            <Button label="Finalizar" onClick={() => save()} />
+          </div>
         </div>
       </section>
     </>

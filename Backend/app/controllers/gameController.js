@@ -3,13 +3,14 @@ const Game = require('../models/Game');
 
 const insertGame = async (req, res) => {    
     try {
-        const { game_type, description, name, time = 5000 } = req.body;
+        const { game_type, description, name, data, time = 5000 } = req.body;
         const newGame = new Game({
             user: req.userId,
             game_type,
             description,
             name,
-            time
+            time,
+            data
         });
         const insert = await newGame.save();
         res.status(200).json( insert );

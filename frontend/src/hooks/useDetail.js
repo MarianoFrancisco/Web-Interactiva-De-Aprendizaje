@@ -54,7 +54,7 @@ const useDetails = (arr=[]) => {
     setDetails((prevDetails) => [...prevDetails, newDetail]);
   };
 
-  const removeDetail = (id) => {
+  const removeFromDetails = (id) => {
     setDetails((prevDetails) => prevDetails.filter((detail) => detail.id !== id));
   };
 
@@ -62,7 +62,7 @@ const useDetails = (arr=[]) => {
     setDetails([]);
   };
 
-  return { details, addDetail, removeDetail, clearDetails };
+  return { details, addDetail, removeFromDetails, clearDetails };
 };
 
 export default useDetails;

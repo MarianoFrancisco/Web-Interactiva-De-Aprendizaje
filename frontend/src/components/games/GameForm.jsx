@@ -7,6 +7,7 @@ import Input from "../form/Input";
 import Select from "../form/Select";
 import Button from "../form/Button";
 import { useNavigate } from "react-router-dom";
+import QuizForm from "./quiz/QuizForm";
 
 export default function GameForm({ edit = {} }) {
   const {
@@ -18,23 +19,28 @@ export default function GameForm({ edit = {} }) {
     watch,
   } = useForm();
 
-  const { insertGame } = useGame();
   const { gameTypes } = useGameTypes();
   const gameTypesMap = gameTypes.map((type) => ({
     name: type.name,
     value: type._id,
   }));
   const [showDetail, setShowDetail] = useState(false);
+  const [game, setGame] = useState({});
   const [gameType, setGameType] = useState({ name: "Selecciona" });
   const navigate = useNavigate();
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
     data.game_type = gameType.value;
-    const insertedGame = await insertGame(data);
-    console.log(insertedGame._id);
+    setGame(data);
+    setShowDetail(true);
   };
-  if (showDetail) {
-    
+
+  if(showDetail){
+    if(gameType.name === 'Preguntas y respuestas'){
+      return <QuizForm game={game}/>
+    }
   }
+
+
   return (
     <>
       <section className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -100,7 +106,7 @@ export default function GameForm({ edit = {} }) {
                 </div>
               </div>
               <div>
-                <Button label="Crear juego" />
+                <Button label="Siguiente" />
               </div>
             </div>
           </form>
