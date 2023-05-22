@@ -14,8 +14,13 @@ const routes = require("./app/routes/index");
 const morgan = require("morgan");
 const credentials = require("./app/middleware/credentials");
 const corsOptions = require("./config/corsOptions");
+const http = require('http');
+const socket = require('./server/server');
 
 const PUERTO = process.env.PUERTO || 5000;
+const SOCKET_PORT = process.env.SOCKET_PORT || 5010;
+const server = http.createServer();
+const io = socket.getIo(server);
 app.use(morgan('dev'));
 //Hacer uso de cors y permitir los json
 app.use(express.json());
@@ -32,3 +37,6 @@ conexionBD();
 app.listen(PUERTO, () => {
   console.log("Puerto: ", PUERTO, " habilitado");
 });
+server.listen(SOCKET_PORT, () => {
+  console.log("Puerto: ", SOCKET_PORT, " socket habilitado");
+})
