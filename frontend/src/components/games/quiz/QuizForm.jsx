@@ -50,7 +50,7 @@ export default function QuizForm({ game }) {
     }
   };
   const save = () => {
-    if (details.length >= 3) {
+    if (details.length >= 5) {
       game.data = details;
       insertGame(game);
       clearDetails();
@@ -64,7 +64,7 @@ export default function QuizForm({ game }) {
     } else {
       Swal.fire({
         icon: "error",
-        title: `Necesitas un mínimo de 3 preguntas para crear el juego`,
+        title: `Necesitas un mínimo de 5 preguntas para crear el juego`,
         showConfirmButton: false,
         timer: 1500,
       });
