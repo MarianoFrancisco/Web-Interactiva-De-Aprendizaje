@@ -8,7 +8,7 @@ import useGames from "../../../hooks/useGame";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 
-export default function QuizForm({game}) {
+export default function LetterSoupForm({game}) {
   const {
     register,
     handleSubmit,
