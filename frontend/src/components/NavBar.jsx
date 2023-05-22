@@ -24,20 +24,20 @@ export default function NavBar() {
       { name: "Usuarios", href: "/users", current: false },
       { name: "Reportes", href: "#", current: false }
     );
-  } else if (auth?.roles?.includes(ROLES.Delivery)) {
+  } else if (auth?.roles?.includes(ROLES.Teacher)) {
     navigation = [];
     // Opción adicional para el rol de entrega
     navigation.push(
       {
-        name: "Productos",
-        href: "/",
+        name: "Crear juego",
+        href: "/new-game",
         current: false,
       },
       {
-        name: "Pedidos",
-        href: "/orders",
+        name: "Mis Juegos",
+        href: "/profile/games",
         current: false,
-      }
+      },
     );
   } else if (auth?.roles?.includes(ROLES.User)) {
     navigation = [];
@@ -110,7 +110,7 @@ export default function NavBar() {
                         className={classNames(
                           item.current
                             ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                            : "text-gray-100 hover:bg-emerald-700 hover:text-white",
                           "rounded-md px-3 py-2 text-sm font-medium"
                         )}
                         aria-current={item.current ? "page" : undefined}

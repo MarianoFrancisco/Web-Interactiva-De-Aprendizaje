@@ -47,8 +47,9 @@ function App() {
               }
             >
               <Route path="/new-game" element={<GameForm />} />
+              <Route path="/profile/games" element={<GameForm />} />
               <Route path="/game-detail/:id" element={<GameDetail />} />
-              <Route path="/quiz-form" element={<QuizForm />} />
+              {/* de momento funciona todo en el new game route */}
               <Route path="/hangman-form" element={<HangmanForm />} />
               <Route path="/memory-form" element={<MemoryForm />} />
               <Route path="/letterSoup-form" element={<LetterSoupForm />} />

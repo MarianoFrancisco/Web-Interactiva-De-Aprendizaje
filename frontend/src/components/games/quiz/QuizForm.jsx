@@ -5,6 +5,7 @@ import Button from "../../form/Button";
 import GameDetail from "../GameDetail";
 import useDetails from "../../../hooks/useDetail";
 import useGames from "../../../hooks/useGame";
+import { useNavigate } from "react-router-dom";
 
 export default function QuizForm({game}) {
   const {
@@ -16,6 +17,7 @@ export default function QuizForm({game}) {
     watch,
   } = useForm();
   const { insertGame } = useGames();
+  const navigate = useNavigate();
   const [addQuestion, setAddQuestion] = useState(false);
   const { details, addDetail, clearDetails, removeFromDetails } = useDetails();
 
@@ -38,6 +40,7 @@ export default function QuizForm({game}) {
     game.data = details
     insertGame(game);
     clearDetails();
+    navigate('/my-games');
   };
   return (
     <>
