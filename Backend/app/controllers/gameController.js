@@ -120,8 +120,7 @@ const deleteGame = async (req, res, next) => {
     const id_game = req.params.id;
     const delete_game = await Game.findByIdAndDelete(id_game);
     if (delete_game) {
-      req.body.id = delete_game.data_game.details;
-      next();
+      res.sendStatus(200);
     } else {
       res
         .status(404)

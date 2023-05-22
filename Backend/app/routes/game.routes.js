@@ -28,6 +28,6 @@ routes.get(
 );
 routes.patch('/', verifyJWT, verifyRoles(ROLES_LIST.Teacher), updateGame);
 routes.get("/:id", verifyJWT, verifyRoles(ROLES_LIST.Teacher), getGame);
-routes.delete('/delete-game/:id', verifyJWT, verifyRoles(ROLES_LIST.Teacher), deleteResult, deleteGame, deleteDetail);
+routes.delete('/delete-game/:id', verifyJWT, verifyRoles(ROLES_LIST.Teacher), deleteResult, deleteGame);
 routes.get('/profile/games', verifyJWT, verifyRoles(ROLES_LIST.Teacher), getUserLoginGames);
 module.exports = routes;
