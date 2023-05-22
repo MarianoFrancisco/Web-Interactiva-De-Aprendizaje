@@ -47,7 +47,7 @@ export default function MemoryForm() {
 
                   <div className="col-span-full">
                     <Input
-                      label="Descripcion"
+                      label="Descripcion de la Palabra Ingresada"
                       type="text"
                       errors={errors}
                       id="second"

@@ -36,6 +36,7 @@ export default function HangmanForm() {
                       type="text"
                       errors={errors}
                       id="question"
+                      placeholder="Ingresa la pregunta a realizar"
                       register={register("question", {
                         required: {
                           value: true,
@@ -51,6 +52,7 @@ export default function HangmanForm() {
                       type="text"
                       errors={errors}
                       id="word"
+                      placeholder="Ingresa la palabra que concida con la pregunta ingresada"
                       register={register("word", {
                         required: {
                           value: true,
