@@ -163,7 +163,9 @@ const getUserLoginGames = async (req, res) => {
   try {
     const user = await User.exists({ username: req.user });
     console.log(user);
-    const game = await Game.find({ user: user });
+    const game = await Game.find({ user: user }).populate("game_type", {
+      name: 1,
+    });
     if (!game) return res.status(204).json({ message: "No games found" });
     res.json(game);
   } catch (error) {

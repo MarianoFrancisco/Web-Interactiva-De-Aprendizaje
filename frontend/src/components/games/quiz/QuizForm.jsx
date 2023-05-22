@@ -40,7 +40,7 @@ export default function QuizForm({game}) {
     game.data = details
     insertGame(game);
     clearDetails();
-    navigate('/my-games');
+    navigate('/profile/games');
   };
   return (
     <>

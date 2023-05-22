@@ -47,6 +47,15 @@ const useGames = () => {
       });
   };
 
+  const getProfileGames = () => {
+    axiosPrivate
+      .get(`${GAME_URL}/profile/games`)
+      .then((res) => setGames(res.data))
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const deleteGame = (id) => {
     axiosPrivate
       .delete(`${GAME_URL}/delete-game/${id}`)
@@ -59,7 +68,7 @@ const useGames = () => {
   };
 
   useEffect(() => {
-    // getGamesByUser();
+    getProfileGames();
   }, []);
 
   return {
