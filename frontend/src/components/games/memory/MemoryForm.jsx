@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import Input from "../../form/Input";
 import Button from "../../form/Button";
 
-export default function QuizForm() {
+export default function MemoryForm() {
   const {
     register,
     handleSubmit,
@@ -26,83 +26,42 @@ export default function QuizForm() {
             <div className="space-y-12">
               <div>
                 <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                  Detalle de Quiz
+                  Detalle de Juego: Memoria
                 </h2>
 
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-8">
                   <div className="col-span-full">
                     <Input
-                      label="Pregunta"
+                      label="Palabra"
                       type="text"
                       errors={errors}
-                      id="question"
-                      register={register("question", {
+                      id="first"
+                      register={register("first", {
                         required: {
                           value: true,
-                          message: "Debes ingresar una pregunta",
+                          message: "Debes ingresar una palabra",
                         },
                       })}
                     />
                   </div>
 
-                  <div className="sm:col-span-4">
+                  <div className="col-span-full">
                     <Input
-                      label="Respuesta"
+                      label="Descripcion"
                       type="text"
                       errors={errors}
-                      id="answer1"
-                      register={register("answer1", {
+                      id="second"
+                      register={register("second", {
                         required: {
                           value: true,
-                          message: "Debes ingresar una respuesta",
+                          message: "Debes ingresar una descripcion",
                         },
                       })}
                     />
                   </div>
-                  <div className="sm:col-span-4">
-                    <Input
-                      label="Respuesta"
-                      type="text"
-                      errors={errors}
-                      id="answer2"
-                      register={register("answer2", {
-                        required: {
-                          value: true,
-                          message: "Debes ingresar una respuesta",
-                        },
-                      })}
-                    />
-                  </div>
-                  {addQuestion && (
-                    <>
-                      <div className="sm:col-span-4">
-                        <Input
-                          label="Respuesta"
-                          type="text"
-                          errors={errors}
-                          id="answer3"
-                          register={register("answer3")}
-                        />
-                      </div>
-                      <div className="sm:col-span-4">
-                        <Input
-                          label="Respuesta"
-                          type="text"
-                          errors={errors}
-                          id="answer4"
-                          register={register("answer4")}
-                        />
-                      </div>
-                    </>
-                  )}
                 </div>
               </div>
               <div className="space-y-2">
-                <Button
-                  label="Añadir respuestas"
-                  type="secondary"
-                  onClick={() => setAddQuestion((prev) => !prev)}
-                />
                 <Button label="Agregar" />
               </div>
             </div>

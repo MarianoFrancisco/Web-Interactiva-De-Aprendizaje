@@ -26,7 +26,7 @@ export default function HangmanForm() {
             <div className="space-y-12">
               <div>
                 <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                  Detalle de Ahorcado
+                  Detalle de Juego: Ahorcado
                 </h2>
 
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-8">
@@ -45,64 +45,23 @@ export default function HangmanForm() {
                     />
                   </div>
 
-                  <div className="sm:col-span-4">
+                  <div className="col-span-full">
                     <Input
-                      label="Respuesta"
+                      label="Palabra"
                       type="text"
                       errors={errors}
-                      id="answer1"
-                      register={register("answer1", {
+                      id="word"
+                      register={register("word", {
                         required: {
                           value: true,
-                          message: "Debes ingresar una respuesta",
+                          message: "Debes ingresar una palabra",
                         },
                       })}
                     />
                   </div>
-                  <div className="sm:col-span-4">
-                    <Input
-                      label="Respuesta"
-                      type="text"
-                      errors={errors}
-                      id="answer2"
-                      register={register("answer2", {
-                        required: {
-                          value: true,
-                          message: "Debes ingresar una respuesta",
-                        },
-                      })}
-                    />
-                  </div>
-                  {addQuestion && (
-                    <>
-                      <div className="sm:col-span-4">
-                        <Input
-                          label="Respuesta"
-                          type="text"
-                          errors={errors}
-                          id="answer3"
-                          register={register("answer3")}
-                        />
-                      </div>
-                      <div className="sm:col-span-4">
-                        <Input
-                          label="Respuesta"
-                          type="text"
-                          errors={errors}
-                          id="answer4"
-                          register={register("answer4")}
-                        />
-                      </div>
-                    </>
-                  )}
                 </div>
               </div>
               <div className="space-y-2">
-                <Button
-                  label="Añadir respuestas"
-                  type="secondary"
-                  onClick={() => setAddQuestion((prev) => !prev)}
-                />
                 <Button label="Agregar" />
               </div>
             </div>
