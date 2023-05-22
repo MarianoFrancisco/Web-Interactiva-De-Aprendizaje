@@ -23,6 +23,12 @@ export default function HangmanForm({ game}) {
   const onSubmit = (data) => {
     const detail = { question: data.question, word: data.word }
     detail.name = data.question;
+    Swal.fire({
+      icon: 'success',
+      title: `${detail.name} agregado exitosamente al juego`,
+      showConfirmButton: false,
+      timer: 1500
+    });
     addDetail(detail);
     reset();
   };
@@ -34,13 +40,12 @@ export default function HangmanForm({ game}) {
       clearDetails();
       Swal.fire({
         icon: 'success',
-        title: `Nuevo juego de ahorcado creado exitosamente: ${game.name}`,
+        title: `Nuevo juego ${game.name} creado exitosamente`,
         showConfirmButton: false,
         timer: 1500
       });
       navigate('/profile/games');
     } else {
-      console.log("Debe haber al menos 6 preguntas");
       Swal.fire({
         icon: 'error',
         title: `Necesitas un mínimo de 6 preguntas para crear el juego : ${game.name}`,
@@ -56,7 +61,7 @@ export default function HangmanForm({ game}) {
           clearDetails={clearDetails}
           details={details}
           removeFromDetails={removeFromDetails}
-          name="preguntas"
+          name="Preguntas"
         />
       </div>
       <section className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -107,6 +112,7 @@ export default function HangmanForm({ game}) {
               </div>
             </div>
           </form>
+          <br></br>
           <div className="space-y-2">
             <Button label="Finalizar" onClick={() => save()} />
           </div>
