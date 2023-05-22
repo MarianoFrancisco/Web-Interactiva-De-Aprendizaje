@@ -7,7 +7,9 @@ const socket = io("http://localhost:5010");
 export default function RoomTest() {
   const [isConnected, setIsConnected] = useState(false);
   useEffect(() => {    
-    socket.on("connect", () => setIsConnected(true));
+    socket.on("connect", () => {
+      setIsConnected(true)
+    });
   }, []);
   return (
     <div>
