@@ -11,6 +11,7 @@ import GameDetail from "./components/games/GameDetail";
 import GameList from "./components/games/list/GameList";
 import QuizPlay from "./components/games/quiz/QuizPlay";
 import Room from "./components/games/Room";
+import RoomTest from "./components/RoomTest";
 
 export const ROLES = {
   Student: 2000,
@@ -27,7 +28,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route element={<PersistLogin />}>
           <Route element={<NavBarLayout />}>
-            <Route path="/" element={<h2>home</h2>} />
+            <Route path="/" element={<RoomTest/>} />
             {/* 
           <Route path="/product/:id" element={<ProductOverview />} />
           <Route path="/unauthorized" element={<Unauthorized />} /> */}
