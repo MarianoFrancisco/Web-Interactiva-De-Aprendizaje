@@ -2,12 +2,14 @@ import { useParams } from "react-router-dom";
 import useGames from "../../hooks/useGame";
 import { useEffect, useState } from "react";
 import QuizPlay from "./quiz/QuizPlay";
+import LetterSoupPlay from "./letterSoup/LetterSoupPlay";
+import MemoryPlay from "./memory/MemoryPlay";
 
 export default function Room() {
   const { gameId } = useParams();
   const { getGame } = useGames();
   const [game, setGame] = useState({});
-  const [showQuiz, setShowQuiz] = useState(false)
+  const [showGame, setShowGame] = useState(false);
 
   useEffect(() => {
     getGame(gameId).then((res) => setGame(res));
@@ -15,14 +17,28 @@ export default function Room() {
 
   console.log(game);
 
-  if (game.game_type && game.game_type.name === 'Preguntas y respuestas') {
-    return (
-      <div>
-        {!showQuiz && <button onClick={() => setShowQuiz(true)}>Comenzar</button>}
-        {showQuiz && <QuizPlay questions={game.data} />}
-      </div>
-    );
+  if (showGame && game.game_type) {
+    if (game.game_type.name === "Preguntas y respuestas")
+      return (
+        <div>
+          <QuizPlay questions={game.data} />
+        </div>
+      );
+    else if (game.game_type.name === "Sopa de letras")
+      return (
+        <div>
+          <LetterSoupPlay words={game.data} />
+        </div>
+      );
+      else if (game.game_type.name === "Memoria")
+      return (
+        <div>
+          <MemoryPlay couples={game.data} />
+        </div>
+      );
   }
 
-  return <div>{game.description}</div>;
+  return (
+    !showGame && <button onClick={() => setShowGame(true)}>Comenzar</button>
+  );
 }
