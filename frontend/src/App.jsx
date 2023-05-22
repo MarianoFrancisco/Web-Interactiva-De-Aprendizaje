@@ -8,10 +8,6 @@ import NavBarLayout from "./layouts/NavBar";
 import PersistLogin from "./components/PersistLogin";
 import GameForm from "./components/games/GameForm";
 import GameDetail from "./components/games/GameDetail";
-import QuizForm from "./components/games/quiz/QuizForm";
-import HangmanForm from "./components/games/hangman/HangmanForm";
-import MemoryForm from "./components/games/memory/MemoryForm";
-import LetterSoupForm from "./components/games/letterSoup/LetterSoupForm";
 import GameList from "./components/games/list/GameList";
 
 export const ROLES = {
@@ -51,10 +47,6 @@ function App() {
               <Route path="/profile/games" element={<GameList />} />
               <Route path="/game-detail/:id" element={<GameDetail />} />
               {/* de momento funciona todo en el new game route */}
-              <Route path="/hangman-form" element={<HangmanForm />} />
-              <Route path="/memory-form" element={<MemoryForm />} />
-              <Route path="/letterSoup-form" element={<LetterSoupForm />} />
-
               {/* <Route path="/orders" element={<OrderList />} /> */}
             </Route>
 

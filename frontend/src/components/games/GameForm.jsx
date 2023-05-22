@@ -8,6 +8,9 @@ import Select from "../form/Select";
 import Button from "../form/Button";
 import { useNavigate } from "react-router-dom";
 import QuizForm from "./quiz/QuizForm";
+import HangmanForm from "./hangman/HangmanForm";
+import MemoryForm from "./memory/MemoryForm";
+import LetterSoupForm from "./letterSoup/LetterSoupForm";
 
 export default function GameForm({ edit = {} }) {
   const {
@@ -37,6 +40,12 @@ export default function GameForm({ edit = {} }) {
   if(showDetail){
     if(gameType.name === 'Preguntas y respuestas'){
       return <QuizForm game={game}/>
+    }else if(gameType.name === 'Ahorcado'){
+      return <HangmanForm game={game}/>
+    }else if(gameType.name === 'Memoria'){
+      return <MemoryForm game={game}/>
+    }else if(gameType.name === 'Sopa de letras'){
+      return <LetterSoupForm game={game}/>
     }
   }
 
