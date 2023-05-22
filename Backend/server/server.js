@@ -30,8 +30,6 @@ io.on('connection', (socket) => {
         } else {
             socket.emit('joinError', 'El codigo no existe...');
         }
-
-
     });
 
     socket.on('disconnect', (data) => {
