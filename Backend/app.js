@@ -12,6 +12,7 @@ const app = express();
 const body_parser = require("body-parser");
 const routes = require("./app/routes/index");
 const morgan = require("morgan");
+const server = require('./server/server');
 const credentials = require("./app/middleware/credentials");
 const corsOptions = require("./config/corsOptions");
 
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use(body_parser.json());
 app.use(credentials);
 app.use(cors(corsOptions));
+app.use(server);
 //middleware for cookies
 app.use(cookieParser());
 app.use("/api/v1.0", routes);
