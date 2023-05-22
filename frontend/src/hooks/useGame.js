@@ -56,15 +56,13 @@ const useGames = () => {
       });
   };
 
-  const deleteGame = (id) => {
-    axiosPrivate
+  const deleteGame = async (id) => {
+    await axiosPrivate
       .delete(`${GAME_URL}/delete-game/${id}`)
-      .then((res) => {
-        getGamesByUser(id);
-      })
       .catch((err) => {
         console.log(err);
       });
+      getProfileGames(id);
   };
 
   useEffect(() => {
