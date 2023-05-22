@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Input from "../../form/Input";
 import Button from "../../form/Button";
+import GameDetail from "../GameDetail";
+import useDetails from "../../../hooks/useDetail";
+import useGames from "../../../hooks/useGame";
+import Swal from 'sweetalert2';
 
-export default function MemoryForm() {
+export default function MemoryForm({ game }) {
   const {
     register,
     handleSubmit,
@@ -12,14 +16,53 @@ export default function MemoryForm() {
     setError,
     watch,
   } = useForm();
-
-  const [addQuestion, setAddQuestion] = useState(false);
+  const { insertGame } = useGames();
+  const navigate = useNavigate();
+  const { details, addDetail, clearDetails, removeFromDetails } = useDetails();
 
   const onSubmit = (data) => {
-    console.log(data);
+    const detail = {
+      first: data.first,
+      second: data.second
+    };
+    detail.name = `${data.first} → ${data.second}`;
+    addDetail(detail);
+    reset();
+  }
+
+  const save = () => {
+    if (details.length >= 5) {
+      const gameDetails = details.map(({ name, ...rest }) => rest);
+      game.data = gameDetails;
+      insertGame(game);
+      clearDetails();
+      Swal.fire({
+        icon: 'success',
+        title: `El juego de memoria se ha creado con exito`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+      navigate('/profile/games');
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: `El juego de memoria necesita como minimo 5 parejas`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
   };
+
   return (
     <>
+      <div>
+        <GameDetail
+          clearDetails={clearDetails}
+          details={details}
+          removeFromDetails={removeFromDetails}
+          name="Parejas"
+        />
+      </div>
       <section className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -62,10 +105,17 @@ export default function MemoryForm() {
                 </div>
               </div>
               <div className="space-y-2">
-                <Button label="Agregar" />
+                <Button
+                  label="Agregar Pareja"
+                  type="secondary"
+                  onSubmit={handleSubmit(onSubmit)}
+                />
               </div>
             </div>
           </form>
+          <div className="space-y-2 mt-2">
+            <Button label="Finalizar" onClick={() => save()} />
+          </div>
         </div>
       </section>
     </>

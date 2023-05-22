@@ -30,7 +30,6 @@ export default function HangmanForm({ game}) {
     if (details.length >= 6) {
       const gameDetails = details.map(({ name, ...rest }) => rest); // Elimina la propiedad 'name' de cada objeto
       game.data = gameDetails;
-      
       insertGame(game);
       clearDetails();
       Swal.fire({
