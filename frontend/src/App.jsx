@@ -10,6 +10,7 @@ import GameForm from "./components/games/GameForm";
 import GameDetail from "./components/games/GameDetail";
 import GameList from "./components/games/list/GameList";
 import QuizPlay from "./components/games/quiz/QuizPlay";
+import Room from "./components/games/Room";
 
 export const ROLES = {
   Student: 2000,
@@ -36,7 +37,7 @@ function App() {
               
               {/* <Route path="/product-form" element={<ProductForm />} />
             <Route path="/profile/products" element={<ProductsList profile={true} />} />
-            <Route path="/cards" element={<CreditCardList />} /> */}
+          <Route path="/cards" element={<CreditCardList />} /> */}
             </Route>
 
             <Route
@@ -44,6 +45,7 @@ function App() {
                 <RequireAuth allowedRoles={[ROLES.Teacher]} />
               }
             >
+              <Route path="/room/:gameId" element={<Room />} />
               <Route path="/new-game" element={<GameForm />} />
               <Route path="/profile/games" element={<GameList />} />
               <Route path="/game-detail/:id" element={<GameDetail />} />

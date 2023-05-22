@@ -1,60 +1,29 @@
 import { useState, useEffect } from "react";
 
 export default function QuizPlay({
-  questions = [
-    {
-      id: "518b0a27-aed4-4d26-8415-e48c4d9200d7",
-      question: "pregunta 1",
-      correctAnswer: "asdf",
-      answers: ["asdf1111", "asdf"],
-      name: "pregunta 1",
-    },
-    {
-      id: "4da1baa5-5b9e-4ba1-a492-0204801fa50e",
-      question: "pregunta 2",
-      correctAnswer: "2222",
-      answers: ["asdf2", "2222"],
-      name: "pregunta 2",
-    },
-    {
-      id: "07178ae4-e3e2-4cd1-a298-138722110642",
-      question: "asdf",
-      correctAnswer: "asdf",
-      answers: ["asdf", "asdf", "asdf", "asdf"],
-      name: "asdf",
-    },
-    {
-      id: "396dd744-a11b-4b61-95d5-d154afa090d1",
-      question: "asdf",
-      correctAnswer: "asdf33333",
-      answers: ["asdf", "asdf", "asdf", "asdf33333"],
-      name: "asdf",
-    },
-  ],
+  questions = [],
 }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [isAnswered, setIsAnswered] = useState(false);
-  const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
 
   useEffect(() => {
     setIsAnswered(false);
-    setShowCorrectAnswer(false);
   }, [currentQuestion]);
 
   const handleAnswerChange = (e) => {
     const selectedAnswer = e.target.value;
     setAnswers((prevAnswers) => [...prevAnswers, selectedAnswer]);
     setIsAnswered(true);
-    setShowCorrectAnswer(
-      selectedAnswer === questions[currentQuestion].correctAnswer
-    );
   };
 
   const handleNextQuestion = () => {
     setCurrentQuestion((prevQuestion) => prevQuestion + 1);
   };
-
+  if (questions.length === 0) {
+    console.log(answers)
+    return <p>No hay preguntas para mostrar</p>;
+  }
   if (currentQuestion === questions.length) {
     console.log(answers)
     return <p>Se ha terminado el juego</p>;
