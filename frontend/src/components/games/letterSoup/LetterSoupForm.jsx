@@ -24,13 +24,13 @@ export default function QuizForm({game}) {
   const onSubmit = (data) => {
     const detail = { word: data.word}
     detail.name = data.word;
+    addDetail(detail);
     Swal.fire({
       icon: 'success',
-      title: `${detail.name} agregado exitosamente al juego`,
+      title: `${detail.name} agregado exitosamente al juego, actualmente hay: ${details.length+1} palabras`,
       showConfirmButton: false,
-      timer: 1500
+      timer: 1000
     });
-    addDetail(detail);
     reset();
   };
   const save = () => {

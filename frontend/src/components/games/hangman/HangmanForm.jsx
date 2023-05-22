@@ -23,13 +23,13 @@ export default function HangmanForm({ game}) {
   const onSubmit = (data) => {
     const detail = { question: data.question, word: data.word }
     detail.name = data.question;
+    addDetail(detail);
     Swal.fire({
       icon: 'success',
-      title: `${detail.name} agregado exitosamente al juego`,
+      title: `${detail.name} agregado exitosamente al juego, actualmente hay: ${details.length+1} preguntas`,
       showConfirmButton: false,
-      timer: 1500
+      timer: 1000
     });
-    addDetail(detail);
     reset();
   };
   const save = () => {
