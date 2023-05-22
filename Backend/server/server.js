@@ -45,3 +45,4 @@ io.on('connection', (socket) => {
 
 server.listen(process.env.SOCKET_PORT);
 
+module.exports = io.on;
