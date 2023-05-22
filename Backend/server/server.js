@@ -1,5 +1,3 @@
-const http = require('http');
-const server = http.createServer();
 const ROLES_LIST = require("../config/roles_list");
 
 module.exports = {

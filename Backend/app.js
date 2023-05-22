@@ -33,10 +33,10 @@ app.use("/api/v1.0", routes);
 //ubicacion de las imagenes
 app.use("/public", express.static(path.join(`${__dirname}/uploads/img`)));
 //Que nuestra aplicacion escuche por el puerto
+server.listen(SOCKET_PORT, () => {
+  console.log("Puerto: ", SOCKET_PORT, " socket habilitado");
+});
 conexionBD();
 app.listen(PUERTO, () => {
   console.log("Puerto: ", PUERTO, " habilitado");
 });
-server.listen(SOCKET_PORT, () => {
-  console.log("Puerto: ", SOCKET_PORT, " socket habilitado");
-})
