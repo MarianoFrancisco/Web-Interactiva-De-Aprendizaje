@@ -1,4 +1,4 @@
-export default function Button({ label = "label", type = 'primary', onClick=undefined }) {
+export default function Button({ children, label = "label", type = 'primary', onClick=undefined, disabled=false}) {
   let buttonStyle = "flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600";
 
   if (type === 'primary') {
@@ -8,8 +8,8 @@ export default function Button({ label = "label", type = 'primary', onClick=unde
   }
 
   return (
-    <button className={buttonStyle} onClick={onClick}>
-      {label}
+    <button className={buttonStyle} onClick={onClick} disabled={disabled}>
+      {children || label}
     </button>
   );
 }

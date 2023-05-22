@@ -9,6 +9,7 @@ import PersistLogin from "./components/PersistLogin";
 import GameForm from "./components/games/GameForm";
 import GameDetail from "./components/games/GameDetail";
 import GameList from "./components/games/list/GameList";
+import QuizPlay from "./components/games/quiz/QuizPlay";
 
 export const ROLES = {
   Student: 2000,
@@ -46,8 +47,7 @@ function App() {
               <Route path="/new-game" element={<GameForm />} />
               <Route path="/profile/games" element={<GameList />} />
               <Route path="/game-detail/:id" element={<GameDetail />} />
-              {/* de momento funciona todo en el new game route */}
-              {/* <Route path="/orders" element={<OrderList />} /> */}
+              <Route path="/game/quiz" element={<QuizPlay />} />
             </Route>
 
             <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
