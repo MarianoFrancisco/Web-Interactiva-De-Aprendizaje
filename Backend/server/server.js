@@ -2,9 +2,7 @@ const http = require('http');
 const server = http.createServer();
 const ROLES_LIST = require("../config/roles_list");
 
-const io = require('socket.io')(server, {
-    cors: { origin: '*' }
-});
+const io = require('socket.io')(server);
 
 const lobbyUsers = [];
 let claveLobby = 0;
