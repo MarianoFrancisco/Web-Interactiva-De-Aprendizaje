@@ -5,7 +5,7 @@ const model = mongoose.model;
 const gameSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
-        ref: "User",
+        ref: "users",
         required: true,
     },
     game_type: {

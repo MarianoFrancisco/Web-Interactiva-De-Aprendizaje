@@ -12,6 +12,7 @@ import QuizForm from "./components/games/quiz/QuizForm";
 import HangmanForm from "./components/games/hangman/HangmanForm";
 import MemoryForm from "./components/games/memory/MemoryForm";
 import LetterSoupForm from "./components/games/letterSoup/LetterSoupForm";
+import GameList from "./components/games/list/GameList";
 
 export const ROLES = {
   Student: 2000,
@@ -47,7 +48,7 @@ function App() {
               }
             >
               <Route path="/new-game" element={<GameForm />} />
-              <Route path="/profile/games" element={<GameForm />} />
+              <Route path="/profile/games" element={<GameList />} />
               <Route path="/game-detail/:id" element={<GameDetail />} />
               {/* de momento funciona todo en el new game route */}
               <Route path="/hangman-form" element={<HangmanForm />} />
