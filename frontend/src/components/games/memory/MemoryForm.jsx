@@ -27,6 +27,12 @@ export default function MemoryForm({ game }) {
     };
     detail.name = `${data.first} → ${data.second}`;
     addDetail(detail);
+    Swal.fire({
+      icon: 'success',
+      title: `Pareja agregada con exito, llevas: ${details.length + 1} parejas.`,
+      showConfirmButton: false,
+      timer: 800
+    });
     reset();
   }
 
@@ -40,7 +46,7 @@ export default function MemoryForm({ game }) {
         icon: 'success',
         title: `El juego de memoria se ha creado con exito`,
         showConfirmButton: false,
-        timer: 1500
+        timer: 1000
       });
       navigate('/profile/games');
     } else {
@@ -48,7 +54,7 @@ export default function MemoryForm({ game }) {
         icon: 'error',
         title: `El juego de memoria necesita como minimo 5 parejas`,
         showConfirmButton: false,
-        timer: 1500
+        timer: 1000
       });
     }
   };
