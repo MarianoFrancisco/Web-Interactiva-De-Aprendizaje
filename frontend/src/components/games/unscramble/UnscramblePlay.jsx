@@ -6,8 +6,8 @@ export default function UnscramblePlay({ words }) {
   const [matchedWords, setMatchedWords] = useState([]);
 
   useEffect(() => {
-    const messLetters = messLetters(words);
-    setWordList(messLetters);
+    const newMessLetters = messLetters(words);
+    setWordList(newMessLetters);
     console.log(wordList)
   }, [words]);
 
