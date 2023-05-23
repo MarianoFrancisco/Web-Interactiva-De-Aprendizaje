@@ -58,8 +58,6 @@ export default function MemoryPlay({ couples }) {
           timer: 800
         });
       }
-      console.log(matchedCards);
-      console.log(matchedCards.length, ' - ', cards.length);
     } else {
       setTimeout(resetSelectedCards, 500);
     }
@@ -95,13 +93,13 @@ export default function MemoryPlay({ couples }) {
         card.text = textCard;
         return (
           <div key={`${card._id}-${index}`}
-            className={`card rounded-md m-2 p-4 text-center cursor-pointer ${isCardFlipped(card) ? "bg-green-500" : "bg-white"}`}
+            className={`card rounded-md m-2 p-4 text-center cursor-pointer ${isCardFlipped(card) ? "bg-green-500" : "bg-blue-500"}`}
             onClick={() => handleCardClick(card)}
           >
             {isCardFlipped(card) ? (
               <p className="text-white">{card.text}</p>
             ) : (
-              <p className="text-gray-700">{'←→'}</p>
+              <p className="text-white">{'←→'}</p>
             )}
           </div>
         );
