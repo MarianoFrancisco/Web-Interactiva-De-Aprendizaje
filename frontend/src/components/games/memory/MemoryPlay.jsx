@@ -58,8 +58,6 @@ export default function MemoryPlay({ couples }) {
           timer: 800
         });
       }
-      console.log(matchedCards);
-      console.log(matchedCards.length, ' - ', cards.length);
     } else {
       setTimeout(resetSelectedCards, 500);
     }
