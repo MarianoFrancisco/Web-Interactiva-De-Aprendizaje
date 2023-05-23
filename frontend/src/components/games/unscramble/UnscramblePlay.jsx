@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default function LetterSoupPlay({ words }) {
+export default function UnscramblePlay({ words }) {
   const [wordList, setWordList] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
   const [matchedWords, setMatchedWords] = useState([]);
