@@ -8,7 +8,7 @@ import useGames from "../../../hooks/useGame";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 
-export default function LetterSoupForm({game}) {
+export default function UnscrambleForm({game}) {
   const {
     register,
     handleSubmit,
@@ -71,7 +71,7 @@ export default function LetterSoupForm({game}) {
             <div className="space-y-12">
               <div>
                 <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                  Detalle de Juego: Sopa de Letras
+                  Detalle de Juego: Descifrado
                 </h2>
 
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-8">

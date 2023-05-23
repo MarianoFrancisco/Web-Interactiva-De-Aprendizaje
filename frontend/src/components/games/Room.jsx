@@ -2,7 +2,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
 import QuizPlay from "./quiz/QuizPlay";
-import LetterSoupPlay from "./letterSoup/LetterSoupPlay";
+import UnscramblePlay from "./unscramble/UnscramblePlay";
 import MemoryPlay from "./memory/MemoryPlay";
 import HangmanPlay from "./hangman/HangmanPlay";
 import Button from "../form/Button";
@@ -29,10 +29,10 @@ export default function Room() {
           <QuizPlay questions={game.data} />
         </div>
       );
-    else if (game.game_type.name === "Sopa de letras")
+    else if (game.game_type.name === "Descifrado")
       return (
         <div>
-          <LetterSoupPlay words={game.data} />
+          <UnscramblePlay words={game.data} />
         </div>
       );
     else if (game.game_type.name === "Memoria")

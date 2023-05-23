@@ -23,7 +23,7 @@ db.gametypes.insertMany([
       "El juego de preguntas y respuestas es una actividad interactiva en la que se plantean preguntas y los jugadores intentan responderlas correctamente. Pueden abarcar diferentes temas y niveles de dificultad. El objetivo es responder la mayor cantidad de preguntas correctas y obtener la puntuación más alta.",
   },
   {
-    name: "Sopa de letras",
+    name: "Descifrado",
     description:
       "La sopa de letras es un juego en el que se presenta una cuadrícula de letras y se ocultan palabras dentro de ella. Los jugadores deben encontrar y marcar las palabras ocultas en la cuadrícula. Pueden estar dispuestas horizontalmente, verticalmente o en diagonal. El objetivo es encontrar todas las palabras en el menor tiempo posible.",
   },
