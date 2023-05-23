@@ -12,9 +12,8 @@ module.exports = {
         io.on('connection', (socket) => {
             console.log('Conectado al socket');
             socket.on('auth', (data) => {
-                console.log('Mensaje X');
-                const { rol } = data;
-                if (rol === ROLES_LIST.Teacher) {
+                const { roles } = data;
+                if (roles?.includes(ROLES_LIST.Teacher)) {
                     const min = 100000;
                     const max = 999999;
                     claveLobby = toString(Math.floor(Math.random() * (max - min + 1)) + min);

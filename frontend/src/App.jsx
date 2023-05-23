@@ -46,7 +46,8 @@ function App() {
                 <RequireAuth allowedRoles={[ROLES.Teacher]} />
               }
             >
-              <Route path="/room/:gameId" element={<Room />} />
+              {/* <Route path="/room/:gameId" element={<Room />} /> */}
+              <Route path="/room" element={<Room />} />
               <Route path="/new-game" element={<GameForm />} />
               <Route path="/profile/games" element={<GameList />} />
               <Route path="/game-detail/:id" element={<GameDetail />} />

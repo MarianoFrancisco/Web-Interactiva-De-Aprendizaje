@@ -6,7 +6,8 @@ export default function GameItem({ game, deleteGame, setEdit }) {
 
   const navigate = useNavigate();
   const play = (id) => {
-    navigate(`/room/${id}`);
+    // navigate(`/room/${id}`);
+    navigate('/room', {state:game});
   }
   return (
     <div className="group bg-white p-3 rounded-xl flex flex-col">

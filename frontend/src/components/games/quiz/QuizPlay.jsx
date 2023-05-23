@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function QuizPlay({
-  questions = [],
-}) {
+export default function QuizPlay({ questions = [] }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [isAnswered, setIsAnswered] = useState(false);
@@ -21,11 +19,11 @@ export default function QuizPlay({
     setCurrentQuestion((prevQuestion) => prevQuestion + 1);
   };
   if (questions.length === 0) {
-    console.log(answers)
+    console.log(answers);
     return <p>No hay preguntas para mostrar</p>;
   }
   if (currentQuestion === questions.length) {
-    console.log(answers)
+    console.log(answers);
     return <p>Se ha terminado el juego</p>;
   }
 
@@ -34,10 +32,9 @@ export default function QuizPlay({
 
   return (
     <div className="w-3/4 mt-14 md:w-1/2 mx-auto">
-<div className="card h-32 rounded-lg text-center bg-amber-500 p-4 mb-4 flex items-center justify-center">
-  <h3 className="text-xl font-bold text-white">{question.question}</h3>
-</div>
-
+      <div className="card h-32 rounded-lg text-center bg-amber-500 p-4 mb-4 flex items-center justify-center">
+        <h3 className="text-xl font-bold text-white">{question.question}</h3>
+      </div>
 
       <div className="flex flex-wrap md:justify-between">
         {question.answers.map((answer, index) => {
@@ -50,7 +47,10 @@ export default function QuizPlay({
           }
 
           return (
-            <div key={index} className={`card w-full p-4 mb-2 md:mb-4 rounded-lg ${answerColor}`}>
+            <div
+              key={index}
+              className={`card w-full p-4 mb-2 md:mb-4 rounded-lg ${answerColor}`}
+            >
               <input
                 type="radio"
                 name={`answer_${currentQuestion}`}
