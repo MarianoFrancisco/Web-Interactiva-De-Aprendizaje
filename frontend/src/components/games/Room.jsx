@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import QuizPlay from "./quiz/QuizPlay";
 import LetterSoupPlay from "./letterSoup/LetterSoupPlay";
 import MemoryPlay from "./memory/MemoryPlay";
+import HangmanPlay from "./hangman/HangmanPlay";
 
 export default function Room() {
   const { gameId } = useParams();
@@ -34,6 +35,12 @@ export default function Room() {
       return (
         <div>
           <MemoryPlay couples={game.data} />
+        </div>
+      );
+      else if (game.game_type.name === "Ahorcado")
+      return (
+        <div>
+          <HangmanPlay questions={game.data} />
         </div>
       );
   }

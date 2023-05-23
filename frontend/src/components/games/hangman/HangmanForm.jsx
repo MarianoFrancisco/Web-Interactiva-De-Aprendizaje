@@ -33,7 +33,7 @@ export default function HangmanForm({ game}) {
     reset();
   };
   const save = () => {
-    if (details.length >= 6) {
+    if (details.length >= 7) {
       const gameDetails = details.map(({ name, ...rest }) => rest); // Elimina la propiedad 'name' de cada objeto
       game.data = gameDetails;
       insertGame(game);
@@ -48,7 +48,7 @@ export default function HangmanForm({ game}) {
     } else {
       Swal.fire({
         icon: 'error',
-        title: `Necesitas un mínimo de 6 preguntas para crear el juego : ${game.name}`,
+        title: `Necesitas un mínimo de 7 preguntas para crear el juego : ${game.name}`,
         showConfirmButton: false,
         timer: 1500
       });
