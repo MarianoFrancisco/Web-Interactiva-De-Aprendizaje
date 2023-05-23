@@ -58,7 +58,7 @@ export default function Room() {
         <div className="card h-20 rounded-lg text-center bg-indigo-500 p-4 mb-4 flex items-center justify-center">
           <h3 className="text-xl font-bold text-white">Codigo <br /> <span className="text-cyan-500">{` hola`}</span></h3>
         </div>
-          <Button>
+          <Button onClick={() => setShowGame(true)}>
             Iniciar
           </Button>
       </div>
