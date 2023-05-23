@@ -7,7 +7,7 @@ module.exports = {
         });
         
         let lobbyUsers = [];
-        let claveLobby = 0;
+        let claveLobby = '';
         
         io.on('connection', (socket) => {
             console.log('Conectado al socket');
@@ -17,7 +17,7 @@ module.exports = {
                 if (rol === ROLES_LIST.Teacher) {
                     const min = 100000;
                     const max = 999999;
-                    claveLobby = Math.floor(Math.random() * (max - min + 1)) + min;
+                    claveLobby = toString(Math.floor(Math.random() * (max - min + 1)) + min);
                     lobbyUsers = [];
                     socket.emit('Clave de Lobby', claveLobby)
                 }
@@ -25,9 +25,13 @@ module.exports = {
         
             socket.on('join', (data) => {
                 const { clave, user_name } = data;
-                if (clave === claveLobby) {
-                    lobbyUsers.push(user_name);
-                    io.emit('lobbyUsers', lobbyUsers);
+                if (toString(clave) === claveLobby) {
+                    if (!lobbyUsers.includes(user_name)) {
+                        lobbyUsers.push(user_name);
+                        socket.emit('lobbyUsers', lobbyUsers);
+                    } else {
+                        socket.emit('joinError', 'Ya estas participante en el juego...');
+                    }
                 } else {
                     socket.emit('joinError', 'El codigo no existe...');
                 }
@@ -39,7 +43,7 @@ module.exports = {
                 if (index !== -1) {
                     lobbyUsers.splice(index, 1);
                 }
-                io.emit('lobbyUsers', lobbyUsers);
+                socket.emit('lobbyUsers', lobbyUsers);
             });
         
         });
