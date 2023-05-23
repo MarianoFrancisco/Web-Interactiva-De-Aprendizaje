@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
+import { set } from "react-hook-form";
 import Swal from 'sweetalert2';
-
 export default function HangmanPlay({
   questions = [],
 }) {
@@ -32,13 +32,10 @@ export default function HangmanPlay({
         showConfirmButton: false,
         timer: 1000
       });
-      if (currentQuestion > 0) {
-        setWrong(wrongs + 1);
-      } else {
-        setWrong(1);
-      }
-      if(wrongs==6){
-        setCurrentQuestion(questions.length-1);
+      setWrong(wrongs + 1);
+      if (wrongs === 5) {
+        setWrong(5);
+        setCurrentQuestion(questions.length - 1);
       }
     }
     document.getElementById("wordInput").value = "";
@@ -55,17 +52,22 @@ export default function HangmanPlay({
   }
   //si hay mas de 0 preguntas
   if (currentQuestion === questions.length) {
-    {
-      questions.map((question, index) => {
-        if (question.word == words[index]) {
-          console.log(`${index + 1}: falló`);
-        } else {
-          console.log(`${index + 1}: falló`)
-        }
-      })
-    }
+    questions.map((question, index) => {
+      if (question.word == words[index]) {
+        console.log(`${index + 1}: acertó`);
+      } else {
+        console.log(`${index + 1}: falló`)
+      }
+    })
+    if (wrongs > 0) { console.log("Tuvo errores"); }
     console.log(words)
-    return <p>Se ha terminado el juego</p>;
+    return (<div>{wrongs === 5 ? (
+      <div className="flex justify-center items-center">
+        <img src={`/hangman/Hangman-6.jpg`} alt="Imagen" />
+      </div>) : (<div className="flex justify-center items-center">
+        <img src={`/hangman/Hangman-${wrongs}.jpg`} alt="Imagen" />
+      </div>)}<div className="flex justify-center items-center">
+      <p>Se ha terminado el juego</p></div></div>);
   }
   //variables para ultima pregunta y para ver que pregunta estamos
   const question = questions[currentQuestion];
@@ -96,7 +98,7 @@ export default function HangmanPlay({
           }}
           disabled={!isWord}
         >
-          {isLastQuestion||wrongs==6 ? "Terminar" : "Siguiente"}
+          {isLastQuestion || wrongs == 6 ? "Terminar" : "Siguiente"}
         </button></div>
     </div>
   );
