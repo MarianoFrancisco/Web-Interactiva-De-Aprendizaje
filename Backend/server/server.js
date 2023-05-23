@@ -6,12 +6,13 @@ module.exports = {
             cors: { origin: 'http://localhost:5173' }
         });
         
-        const lobbyUsers = [];
+        let lobbyUsers = [];
         let claveLobby = 0;
         
         io.on('connection', (socket) => {
             console.log('Conectado al socket');
             socket.on('auth', (data) => {
+                console.log('Mensaje X');
                 const { rol } = data;
                 if (rol === ROLES_LIST.Teacher) {
                     const min = 100000;
