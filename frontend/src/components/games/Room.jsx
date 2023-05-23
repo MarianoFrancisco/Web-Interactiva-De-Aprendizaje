@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import QuizPlay from "./quiz/QuizPlay";
 import LetterSoupPlay from "./letterSoup/LetterSoupPlay";
 import MemoryPlay from "./memory/MemoryPlay";
+import HangmanPlay from "./hangman/HangmanPlay";
 import Button from "../form/Button";
 
 const socket = io.connect("http://localhost:5010");
@@ -38,6 +39,12 @@ export default function Room() {
       return (
         <div>
           <MemoryPlay couples={game.data} />
+        </div>
+      );
+      else if (game.game_type.name === "Ahorcado")
+      return (
+        <div>
+          <HangmanPlay questions={game.data} />
         </div>
       );
   }
