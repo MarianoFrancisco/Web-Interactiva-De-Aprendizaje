@@ -23,7 +23,6 @@ export default function NavBar() {
     navigation.push(
       { name: "Crear Usuario", href: "/new-employee", current: false },
       { name: "Usuarios", href: "/users", current: false },
-      { name: "Reportes", href: "#", current: false }
     );
   } else if (auth?.roles?.includes(ROLES.Teacher)) {
     navigation = [];
