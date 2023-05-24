@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import QuizResult from "./QuizResult";
 
 export default function QuizPlay({ questions = [] }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -24,7 +25,8 @@ export default function QuizPlay({ questions = [] }) {
   }
   if (currentQuestion === questions.length) {
     console.log(answers);
-    return <p>Se ha terminado el juego</p>;
+    // return <p>Se ha terminado el juego</p>;
+    return <QuizResult answers={answers} questions={questions}/>
   }
 
   const question = questions[currentQuestion];
