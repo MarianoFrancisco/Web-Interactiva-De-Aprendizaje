@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import useMedals from "../../hooks/useMedal";
 import MedalItem from "./MedalItem";
 
-export default function Comment() {
+export default function Medal() {
   const {
     register,
     handleSubmit,

@@ -1,4 +1,4 @@
-export default function CommentItem({ medal }) {
+export default function MedalItem({ medal }) {
   let positionText;
   switch (medal.position) {
     case "1":
