@@ -39,7 +39,7 @@ export default function NavBar() {
         current: false,
       },
       {
-        name: "Comentar",
+        name: "Comentarios",
         href: "/comments",
         current: false,
       }
@@ -49,7 +49,7 @@ export default function NavBar() {
     // Opción adicional para el rol de entrega
     navigation.push(
       {
-        name: "Comentar",
+        name: "Comentarios",
         href: "/comments",
         current: false,
       }
