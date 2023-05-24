@@ -1,11 +1,9 @@
 import { useState, useEffect,useContext } from "react";
 import React, { useRef } from "react";
 import AuthContext from "../../../context/AuthProvider";
-import { set } from "react-hook-form";
 import Swal from 'sweetalert2';
 import useGameTypes from "../../../hooks/useGameType";
 import useMedals from "../../../hooks/useMedal";
-
 
 export default function HangmanPlay({
   questions = [],
@@ -19,7 +17,6 @@ export default function HangmanPlay({
   const { gameTypes } = useGameTypes();
   const { insertMedal } = useMedals();
   const { auth } = useContext(AuthContext);
-  const medalSaved = useState(false);
 
   useEffect(() => {
     setIsWord(false);
@@ -27,7 +24,6 @@ export default function HangmanPlay({
   const saveMedal = (position,game_type) => {
     const medal={position:position,game_type:game_type};
     insertMedal(medal);
-    console.log(medal);
   };
   const emptyChange = (input) => {
     const isValid = /^\S+$/.test(input.target.value); // Verificar si es una sola palabra válida
