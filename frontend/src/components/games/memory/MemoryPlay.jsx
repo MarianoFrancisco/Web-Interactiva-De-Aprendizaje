@@ -8,6 +8,15 @@ export default function MemoryPlay({ couples }) {
   const [selectedCards, setSelectedCards] = useState([]);
   const [matchedCards, setMatchedCards] = useState([]);
   const [completed, setCompeted] = useState(false);
+  const [tryes, setTryes] = useState(0);
+  const [points, setPoints] = useState(100);
+
+  useEffect(() => {
+    if (tryes > couples.length) {
+      const difference = tryes - couples.length;
+      setPoints(100 - ((tryes / couples.length) * difference));
+    }
+  }, [tryes])
 
   useEffect(() => {
     const shuffledCards = shuffleCards(couples);
@@ -65,6 +74,7 @@ export default function MemoryPlay({ couples }) {
     } else {
       setTimeout(resetSelectedCards, 500);
     }
+    setTryes((prevCount) => prevCount + 1);
   };
 
   const resetSelectedCards = () => {
@@ -86,9 +96,40 @@ export default function MemoryPlay({ couples }) {
   return (
     <>
       {completed ? (
-        <div className="flex flex-wrap justify-center item-center mt-8">
-          <p className="font-bold text-xl">Juego Completado</p>
-        </div>
+        <>
+          <h1 className="mt-10 text-center text-2xl bg-emerald-100 font-bold leading-9 tracking-tight text-black-900">Juego Completado</h1>
+          <br />
+          <div className="flex flex-wrap justify-center item-center mt-8">
+            <table className="table-fixed w-1/2" style={{ border: "1px solid black", borderRadius: "10px" }}>
+              <thead>
+                <tr>
+                  <th className="font-bold text-center border-b border-black-200 py-4" style={{ border: "1px solid black", borderRadius: "10px" }}>
+                    Intentos Totales
+                  </th>
+                  <th className="font-bold text-center border-b border-black-200 py-4" style={{ border: "1px solid black", borderRadius: "10px" }}>
+                    Intentos Fallidos
+                  </th>
+                  <th className="font-bold text-center border-b border-black-200 py-4" style={{ border: "1px solid black", borderRadius: "10px" }}>
+                    Puntaje Obtenido
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="font-bold text-center border-b border-black-200 py-4" style={{ border: "1px solid black", borderRadius: "10px" }}>
+                    {tryes}
+                  </td>
+                  <td className="font-bold text-center border-b border-black-200 py-4" style={{ border: "1px solid black", borderRadius: "10px" }}>
+                    {(tryes - couples.length)}
+                  </td>
+                  <td className="font-bold text-center border-b border-black-200 py-4" style={{ border: "1px solid black", borderRadius: "10px" }}>
+                    {points}/100
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </>
       ) : (
         <div className="bg-white h-full mt-14 mb-16">
           <div className="card h-32 rounded-lg text-center w-1/2 mx-auto bg-amber-500 p-4 mb-6 flex items-center justify-center">
