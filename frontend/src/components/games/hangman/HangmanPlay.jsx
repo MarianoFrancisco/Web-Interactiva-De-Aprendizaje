@@ -1,16 +1,30 @@
-import { useState, useEffect } from "react";
-import { set } from "react-hook-form";
+import { useState, useEffect,useContext } from "react";
+import React, { useRef } from "react";
+import AuthContext from "../../../context/AuthProvider";
 import Swal from 'sweetalert2';
+import useGameTypes from "../../../hooks/useGameType";
+import useMedals from "../../../hooks/useMedal";
+
 export default function HangmanPlay({
   questions = [],
 }) {
+  const medalSavedRef = useRef(false);
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [words, setWords] = useState([]);
   const [wrongs, setWrong] = useState(0);
   const [isWord, setIsWord] = useState(false);
+  const { gameTypes } = useGameTypes();
+  const { insertMedal } = useMedals();
+  const { auth } = useContext(AuthContext);
+
   useEffect(() => {
     setIsWord(false);
   }, [currentQuestion]);
+  const saveMedal = (position,game_type) => {
+    const medal={position:position,game_type:game_type};
+    insertMedal(medal);
+  };
   const emptyChange = (input) => {
     const isValid = /^\S+$/.test(input.target.value); // Verificar si es una sola palabra válida
     setIsWord(isValid);
@@ -54,6 +68,8 @@ export default function HangmanPlay({
   if (currentQuestion === questions.length) {
     let allPoints = 100 * questions.length;
     let myPoints = 0;
+    let game_type="";
+    
     const pointsArray = [];
     questions.map((question, index) => {
       if (question.word == words[index]) {
@@ -63,8 +79,13 @@ export default function HangmanPlay({
         pointsArray.push(0);
       }
     })
-    if (wrongs > 0) { console.log("Tuvo errores"); }
-    console.log(words)
+    gameTypes.map((gameTypes, index) => {
+      if (gameTypes.name == "Ahorcado") {
+        game_type=gameTypes._id;
+      }
+    })
+    let obtainMedal=(allPoints-myPoints);
+    let myMedal;
     return (<div>{wrongs === 5 ? (
       <div className="flex justify-center items-center">
         <img src={`/hangman/Hangman-6.jpg`} alt="Imagen" />
@@ -90,7 +111,31 @@ export default function HangmanPlay({
                   <br /></td>
               </tr>  {/* Salto de línea */}</>
             ))}</tbody></table>
-      </div></div>);
+      </div>
+      {auth.username != null && !medalSavedRef.current && (
+      <>
+        {obtainMedal === 0 && (
+          <div>
+            {myMedal = "1"}
+            {saveMedal(myMedal, game_type)}
+          </div>
+        )}
+        {obtainMedal === 100 && (
+          <div>
+            {myMedal = "2"}
+            {saveMedal(myMedal, game_type)}
+          </div>
+        )}
+        {obtainMedal === 200 && (
+          <div>
+            {myMedal = "3"}
+            {saveMedal(myMedal, game_type)}
+          </div>
+        )}
+        {medalSavedRef.current = true}
+      </>
+    )}
+      </div>);
   }
   //variables para ultima pregunta y para ver que pregunta estamos
   const question = questions[currentQuestion];

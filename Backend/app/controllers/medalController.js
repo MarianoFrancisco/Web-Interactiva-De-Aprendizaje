@@ -3,9 +3,10 @@ const User = require("../models/User");
 
 const insertMedal = async (req, res, next) => {
     try {
-        const { user, position, game_type } = req.body;
+        const { position, game_type } = req.body;
+        const user=req.userId;
         const newMedal = new Medal({
-            user,
+            user:user,
             position,
             game_type
         });
