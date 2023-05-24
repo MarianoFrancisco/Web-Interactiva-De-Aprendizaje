@@ -91,6 +91,9 @@ export default function MemoryPlay({ couples }) {
         </div>
       ) : (
         <div className="bg-white h-full mt-14 mb-16">
+          <div className="card h-32 rounded-lg text-center w-1/2 mx-auto bg-amber-500 p-4 mb-6 flex items-center justify-center">
+            <h3 className="text-3xl font-bold text-white">Encuentra parejas</h3>
+          </div>
           <div className="flex justify-center items-center h-full">
             <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
               {cards.map((card, index) => {
