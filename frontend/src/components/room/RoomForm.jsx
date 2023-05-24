@@ -4,6 +4,8 @@ import AuthContext from "../../context/AuthProvider";
 import Input from "../form/Input";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUsers } from "@fortawesome/free-solid-svg-icons";
 
 export default function RoomForm() {
   const { auth } = useContext(AuthContext);
@@ -26,12 +28,9 @@ export default function RoomForm() {
   return (
     <section>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
-            className="mx-auto h-20 w-auto"
-            src="/logo.png"
-            alt="Gamificacion"
-          />
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm text-center">
+
+          <FontAwesomeIcon icon={faUsers} className="mx-auto h-20 w-auto text-emerald-900"/>
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Unirme a una sala
           </h2>
