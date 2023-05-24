@@ -12,6 +12,7 @@ import GameList from "./components/games/list/GameList";
 import QuizPlay from "./components/games/quiz/QuizPlay";
 import Room from "./components/games/Room";
 import RoomTest from "./components/RoomTest";
+import Comment from "./components/comment/Comment";
 
 export const ROLES = {
   Student: 2000,
@@ -35,12 +36,19 @@ function App() {
 
             {/* we want to protect these routes */}
             <Route element={<RequireAuth allowedRoles={[ROLES.Student]} />}>
-              
               {/* <Route path="/product-form" element={<ProductForm />} />
             <Route path="/profile/products" element={<ProductsList profile={true} />} />
           <Route path="/cards" element={<CreditCardList />} /> */}
             </Route>
-
+            <Route
+              element={
+                <RequireAuth allowedRoles={[ROLES.Teacher,ROLES.Student]} />
+              }
+            >
+              <Route path="/comments" element={<Comment />} />
+            </Route>
+            <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+            </Route>
             <Route
               element={
                 <RequireAuth allowedRoles={[ROLES.Teacher]} />

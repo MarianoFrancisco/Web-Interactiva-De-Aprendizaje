@@ -12,8 +12,9 @@ export default function HangmanPlay({
   useEffect(() => {
     setIsWord(false);
   }, [currentQuestion]);
-  const emptyChange = () => {
-    setIsWord(true);
+  const emptyChange = (input) => {
+    const isValid = /^\S+$/.test(input.target.value); // Verificar si es una sola palabra válida
+    setIsWord(isValid);
   };
   const handleWord = (input) => {
     const inputWord = input.value;
@@ -83,7 +84,7 @@ export default function HangmanPlay({
         <h3 className="text-xl font-bold text-white">{question.question}</h3>
       </div>
       <div className="flex flex-wrap md:justify-between  bg-blue-200 rounded-md p-4 " >
-        <label htmlFor="wordInput">Adivina la palabra:</label>
+        <label htmlFor="wordInput">Escribe la palabra de {question.word.length} {question.word.length===1?"letra:":"letras:"}</label>
         <input
           type="text"
           id="wordInput"

@@ -6,6 +6,7 @@ import useDetails from "../../../hooks/useDetail";
 import useGames from "../../../hooks/useGame";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
+import { useState, useEffect } from "react";
 
 export default function HangmanForm({ game}) {
   const {
@@ -101,20 +102,21 @@ export default function HangmanForm({ game}) {
                         required: {
                           value: true,
                           message: "Debes ingresar una palabra",
-                        },
+                        },pattern:{value:/^\S+$/, message:"Solo debes escribir una palabra"},
                       })}
                     />
                   </div>
                 </div>
               </div>
               <div className="space-y-2">
-                <Button label="Agregar" type="secondary" onSubmit={handleSubmit(onSubmit)} />
+                <Button label="Agregar pregunta"
+                  type="secondary" onClick={handleSubmit(onSubmit)}/>
               </div>
             </div>
           </form>
           <br></br>
           <div className="space-y-2">
-            <Button label="Finalizar" onClick={() => save()} />
+            <Button label="Finalizar" onClick={() => save()}/>
           </div>
         </div>
       </section>

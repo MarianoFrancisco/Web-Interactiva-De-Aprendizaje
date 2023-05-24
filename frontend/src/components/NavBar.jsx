@@ -38,24 +38,19 @@ export default function NavBar() {
         href: "/profile/games",
         current: false,
       },
+      {
+        name: "Comentarios",
+        href: "/comments",
+        current: false,
+      }
     );
-  } else if (auth?.roles?.includes(ROLES.User)) {
+  } else if (auth?.roles?.includes(ROLES.Student)) {
     navigation = [];
     // Opción adicional para el rol de entrega
     navigation.push(
       {
-        name: "Nuevo Producto",
-        href: "/product-form",
-        current: false,
-      },
-      {
-        name: "Mis Productos",
-        href: "/profile/products",
-        current: false,
-      },
-      {
-        name: "Mis Pedidos",
-        href: "/orders",
+        name: "Comentarios",
+        href: "/comments",
         current: false,
       }
     );
