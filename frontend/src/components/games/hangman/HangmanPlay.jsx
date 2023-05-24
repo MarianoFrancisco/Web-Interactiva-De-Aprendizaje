@@ -8,7 +8,6 @@ export default function HangmanPlay({
   const [words, setWords] = useState([]);
   const [wrongs, setWrong] = useState(0);
   const [isWord, setIsWord] = useState(false);
-
   useEffect(() => {
     setIsWord(false);
   }, [currentQuestion]);
@@ -53,11 +52,15 @@ export default function HangmanPlay({
   }
   //si hay mas de 0 preguntas
   if (currentQuestion === questions.length) {
+    let allPoints = 100 * questions.length;
+    let myPoints = 0;
+    const pointsArray = [];
     questions.map((question, index) => {
       if (question.word == words[index]) {
-        console.log(`${index + 1}: acertó`);
+        pointsArray.push(100);
+        myPoints = myPoints + 100;
       } else {
-        console.log(`${index + 1}: falló`)
+        pointsArray.push(0);
       }
     })
     if (wrongs > 0) { console.log("Tuvo errores"); }
@@ -67,8 +70,27 @@ export default function HangmanPlay({
         <img src={`/hangman/Hangman-6.jpg`} alt="Imagen" />
       </div>) : (<div className="flex justify-center items-center">
         <img src={`/hangman/Hangman-${wrongs}.jpg`} alt="Imagen" />
-      </div>)}<div className="flex justify-center items-center">
-      <p>Se ha terminado el juego</p></div></div>);
+      </div>)}<h1 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-black-900">Has terminado, datos del juego:</h1>
+      <div><h1 className="mt-10 text-center text-2xl bg-emerald-100 font-bold leading-9 tracking-tight text-black-900">PUNTEO TOTAL: {myPoints}</h1></div>
+      <br />
+      <div className="flex justify-center items-center">
+        <table className="table-fixed w-full" style={{ border: "1px solid black", borderRadius: "10px" }}>
+          <tbody>
+            {questions.map((question, index) => (<>
+              <tr key={index}>
+                <td className="font-bold text-center border-b border-black-200 py-4" style={{ border: "1px solid black", borderRadius: "10px" }}>
+                  {(index + 1)}
+                  <br /></td>
+                <td className="font-bold text-center border-b border-black-200 py-4" style={{ border: "1px solid black", borderRadius: "10px" }}>
+                  Palabra ingresada: {words[index]}
+                  <br /></td><td className="font-bold text-center border-b border-black-200 py-4" style={{ border: "1px solid black", borderRadius: "10px" }}>
+                  Respuesta: {question.word}
+                  <br /></td><td className="font-bold text-center border-b border-black-200 py-4" style={{ border: "1px solid black", borderRadius: "10px" }}>
+                  <span className="bg-blue-100 text-sm p-1 rounded-lg">PUNTOS:{pointsArray[index]}</span>
+                  <br /></td>
+              </tr>  {/* Salto de línea */}</>
+            ))}</tbody></table>
+      </div></div>);
   }
   //variables para ultima pregunta y para ver que pregunta estamos
   const question = questions[currentQuestion];
@@ -84,7 +106,7 @@ export default function HangmanPlay({
         <h3 className="text-xl font-bold text-white">{question.question}</h3>
       </div>
       <div className="flex flex-wrap md:justify-between  bg-blue-200 rounded-md p-4 " >
-        <label htmlFor="wordInput">Escribe la palabra de {question.word.length} {question.word.length===1?"letra:":"letras:"}</label>
+        <label htmlFor="wordInput">Escribe la palabra de {question.word.length} {question.word.length === 1 ? "letra:" : "letras:"}</label>
         <input
           type="text"
           id="wordInput"
