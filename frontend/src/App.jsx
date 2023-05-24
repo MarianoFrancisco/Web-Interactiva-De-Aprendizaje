@@ -37,6 +37,7 @@ function App() {
           <Route element={<NavBarLayout />}>
             <Route path="/" element={<RoomTest />} />
             <Route path="/enter-room" element={<RoomForm />} />
+            <Route path="/room/:code" element={<Room />} />
             <Route path="/commentsUsers" element={<CommentUser />} />
             <Route path="/ranking/:game" element={<Ranking />} />
             <Route path="/pruebaRanking" element={<PruebaRanking />} />

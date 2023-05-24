@@ -2,13 +2,14 @@ import { useContext } from "react";
 import Button from "../form/Button";
 import AuthContext from "../../context/AuthProvider";
 import Input from "../form/Input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 
 export default function RoomForm() {
   const { auth } = useContext(AuthContext);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -22,8 +23,8 @@ export default function RoomForm() {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
     reset();
+    navigate(`/room/${data.code}`, { state: data });
   };
   return (
     <section>

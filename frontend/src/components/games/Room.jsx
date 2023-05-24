@@ -13,6 +13,8 @@ export default function Room() {
   const { state } = useLocation();
   const game = state;
   const [showGame, setShowGame] = useState(false);
+  const code = state.code;
+  const username = state.username;
 
   const startGame = () => {
 
@@ -53,10 +55,10 @@ export default function Room() {
     !showGame && (
       <div className="w-3/4 mt-14 md:w-1/2 mx-auto">
         <div className="card h-32 rounded-lg text-center bg-cyan-500 p-4 mb-4 flex items-center justify-center">
-          <h3 className="text-xl font-bold text-white">Nueva sala para <br />{game.name}</h3>
+          <h3 className="text-xl font-bold text-white">Bienvenido {` ${username} `} a la sala de espera <br />{game.name}</h3>
         </div>
         <div className="card h-20 rounded-lg text-center bg-indigo-500 p-4 mb-4 flex items-center justify-center">
-          <h3 className="text-xl font-bold text-white">Codigo <br /> <span className="text-cyan-500">{` hola`}</span></h3>
+          <h3 className="text-xl font-bold text-white">Codigo <br /> <span className="text-cyan-500">{code}</span></h3>
         </div>
           <Button onClick={() => setShowGame(true)}>
             Iniciar
