@@ -71,7 +71,7 @@ export default function HangmanPlay({
       </div>) : (<div className="flex justify-center items-center">
         <img src={`/hangman/Hangman-${wrongs}.jpg`} alt="Imagen" />
       </div>)}<h1 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-black-900">Has terminado, datos del juego:</h1>
-      <div><h1 className="mt-10 text-center text-2xl bg-emerald-100 font-bold leading-9 tracking-tight text-black-900">PUNTEO TOTAL: {myPoints}</h1></div>
+      <div><h1 className="mt-10 text-center text-2xl bg-emerald-100 font-bold leading-9 tracking-tight text-black-900">PUNTEO TOTAL: {myPoints} / {allPoints}</h1></div>
       <br />
       <div className="flex justify-center items-center">
         <table className="table-fixed w-full" style={{ border: "1px solid black", borderRadius: "10px" }}>
