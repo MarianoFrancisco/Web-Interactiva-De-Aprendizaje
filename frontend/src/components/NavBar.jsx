@@ -15,7 +15,7 @@ function classNames(...classes) {
 }
 
 export default function NavBar() {
-  const { auth, setAuth } = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
   const logout = useLogout();
   const navigate = useNavigate();
   if (auth?.roles?.includes(ROLES.Admin)) {
