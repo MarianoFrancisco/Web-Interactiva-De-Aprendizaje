@@ -6,11 +6,13 @@ const gameRoute = require('./game.routes');
 const detailRoute = require('./detail.routes');
 const resultRoute = require('./result.routes');
 const userRoute = require('./user.routes');
+const commentRoute = require('./comment.routes');
 
 router.use('/gameType', gameTypeRoute);
 router.use('/game', gameRoute);
 router.use('/detail', detailRoute);
 router.use('/result', resultRoute);
 router.use('/user', userRoute);
+router.use('/comment',commentRoute);
 
 module.exports = router;
