@@ -49,6 +49,11 @@ export default function NavBar() {
     // Opción adicional para el rol de entrega
     navigation.push(
       {
+        name: "Entrar a sala",
+        href: "/enter-room",
+        current: false,
+      },
+      {
         name: "Medallas",
         href: "/medals",
         current: false,
@@ -57,12 +62,17 @@ export default function NavBar() {
         name: "Comentarios",
         href: "/comments",
         current: false,
-      }
+      },
     );
   }else{
     navigation = [];
     // Opción adicional para el rol de entrega
     navigation.push(
+      {
+        name: "Entrar a sala",
+        href: "/enter-room",
+        current: false,
+      },
       {
         name: "Comentarios",
         href: "/commentsUsers",
