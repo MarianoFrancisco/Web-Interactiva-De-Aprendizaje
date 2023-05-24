@@ -27,7 +27,7 @@ const useMedals = () => {
   return {
     medal,
     insertMedal,
-    getAllMedals
+    getAllMedals,
   };
 };
 
