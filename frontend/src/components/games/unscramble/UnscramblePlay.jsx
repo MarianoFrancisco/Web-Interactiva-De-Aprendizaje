@@ -1,4 +1,5 @@
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useRef } from "react";
 import Swal from 'sweetalert2';
 import AuthContext from "../../../context/AuthProvider";
 import useGameTypes from "../../../hooks/useGameType";
@@ -16,7 +17,7 @@ export default function UnscramblePlay({ words = [] }) {
   const { gameTypes } = useGameTypes();
   const { insertMedal } = useMedals();
   const { auth } = useContext(AuthContext);
-  let game_type="";
+  let game_type = "";
 
 
   useEffect(() => {
@@ -49,21 +50,16 @@ export default function UnscramblePlay({ words = [] }) {
 
   gameTypes.map((gameTypes, index) => {
     if (gameTypes.name == "Descifrado") {
-      game_type=gameTypes._id;
+      game_type = gameTypes._id;
     }
   })
 
-  const saveMedal = (game_type) => {
-    const position="";
-    if(points==null){
-      position="1";
-    }else if(points){
-
-    }
-    if(position!=""){
-    const medal={position:position,game_type:game_type};
+  const saveMedal = (position, game_type) => {
+    const medal = {
+      position: position,
+      game_type: game_type
+    };
     insertMedal(medal);
-    }
   };
 
   const messLetters = (wordsArray) => {
@@ -143,6 +139,8 @@ export default function UnscramblePlay({ words = [] }) {
 
   const wordN = wordList[currentWord];
   const isLastWord = currentWord === wordList.length - 1;
+  let obtainMedal = (100 - (points ? points : 100));
+  let myMedal;
 
   return (
     <div className="w-3/4 mt-14 md:w-1/2 mx-auto">
@@ -177,6 +175,29 @@ export default function UnscramblePlay({ words = [] }) {
               </tbody>
             </table>
           </div>
+          {auth.username != null && !medalSavedRef.current && (
+            <>
+              {obtainMedal === 0 && (
+                <div>
+                  {myMedal = "1"}
+                  {saveMedal(myMedal, game_type)}
+                </div>
+              )}
+              {obtainMedal > 90 && (
+                <div>
+                  {myMedal = "2"}
+                  {saveMedal(myMedal, game_type)}
+                </div>
+              )}
+              {obtainMedal > 80 && (
+                <div>
+                  {myMedal = "3"}
+                  {saveMedal(myMedal, game_type)}
+                </div>
+              )}
+              {medalSavedRef.current = true}
+            </>
+          )}
         </>
       ) : (
         <>
