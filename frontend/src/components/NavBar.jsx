@@ -54,6 +54,16 @@ export default function NavBar() {
         current: false,
       }
     );
+  }else{
+    navigation = [];
+    // Opción adicional para el rol de entrega
+    navigation.push(
+      {
+        name: "Comentarios",
+        href: "/commentsUsers",
+        current: false,
+      }
+    );
   }
 
   const signOut = async () => {

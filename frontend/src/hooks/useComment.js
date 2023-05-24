@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import useAxiosPrivate from "./useAxiosPrivate";
-
+import axios from "../api/axios";
 const COMMENT_URL = "/comment";
 
 const useComments = () => {
   const axiosPrivate = useAxiosPrivate();
   const [comment, setComment] = useState([]);
   const getAllComments = () => {
-    axiosPrivate
+    axios
       .get(`${COMMENT_URL}/get-comment`)
       .then((res) => setComment(res.data))
       .catch((err) => console.log(err));
