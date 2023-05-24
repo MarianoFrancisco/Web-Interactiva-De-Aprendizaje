@@ -9,7 +9,7 @@ const insertResult = async (req, res) => {
             players
         });
         const insert = newResult.save();
-        res.status(200).json( insert ); 
+        res.status(200).json(insert);
     } catch (error) {
         res.status(500).json({ error: 'Ocurrio un error interno en el servidor...' });
     }
@@ -17,10 +17,10 @@ const insertResult = async (req, res) => {
 
 const getResultsForGame = async (req, res) => {
     try {
-        const game_id = req.params.id;
-        const results = await Result.find({ game_id });
+        const id = req.params.id;
+        const results = await Result.find({ _id: id});
         if (results.length > 0) {
-            res.status(200).json( results );
+            res.status(200).json(results[0]);
         } else {
             res.status(404).jason({ message: 'No se encontraron resultados de este juego...' })
         }

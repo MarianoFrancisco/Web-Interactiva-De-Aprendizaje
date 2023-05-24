@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import useAxiosPrivate from "./useAxiosPrivate";
+import axios from "../api/axios";
 
 const RESULT_URL = '/result';
 const useResult = () => {
@@ -21,13 +22,16 @@ const useResult = () => {
     };
 
     const getResultsForGame = (id) => {
-        axiosPrivate
-            .get(`${RESULT_URL}/get-for-game/${id}`)
-            .then((res) => setResultsForGame(res.data))
-            .catch((err) => {
-                console.log(err);
-            });
-    };
+        return axios
+          .get(`${RESULT_URL}/get-for-game/${id}`)
+          .then((response) => {
+            return response.data;
+          })
+          .catch((error) => {
+            console.log(error);
+            return null;
+          });
+      };
 
     const getResultsByUser = (id) => {
         axiosPrivate
@@ -37,11 +41,6 @@ const useResult = () => {
                 console.log(err);
             });
     };
-
-    useEffect(() => {
-        getResultsForGame();
-        getResultsByUser();
-    }, []);
 
     return {
         resultsForGame,
