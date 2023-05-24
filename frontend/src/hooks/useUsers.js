@@ -14,8 +14,8 @@ const useUsers = () => {
       .catch((err) => console.log(err));
   };
 
-  const createNewUser = (user) => {
-    axios
+  const createNewUser = async (user) => {
+    await axios
       .post(USERS_URL, user, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,

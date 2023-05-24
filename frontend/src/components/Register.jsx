@@ -42,12 +42,16 @@ const Register = ({
       value: { Teacher: ROLES.Teacher },
     },
   ];
-  const [rol, setRol] = useState(roles[0]);
+  const [rol, setRol] = useState(
+    admin ? { name: "Administrador", value: { Admin: ROLES.Admin } } : roles[0]
+  );
 
   const { createNewUser } = useUsers();
   const navigate = useNavigate();
 
   if (admin) {
+    roles.pop();
+    roles.pop();
     roles.push({
       name: "Administrador",
       value: { Admin: ROLES.Admin },
@@ -68,9 +72,15 @@ const Register = ({
   const onSubmit = (data) => {
     data.roles = rol.value;
     data.password = data.pwd;
-    createNewUser(data);
-    reset();
-    navigate("/login");
+    createNewUser(data).then(() => {
+      reset()
+      if(admin){
+        navigate("/users", {replace:true})
+      }else{
+        navigate("/login");
+      }
+    }
+    );
   };
 
   return (
@@ -180,7 +190,7 @@ const Register = ({
                       htmlFor="rol"
                       className="block text-sm font-medium leading-6 text-gray-900"
                     >
-                      ¿Qué eres?
+                      {admin ? `Rol` : `¿Qué eres?`}
                     </label>
                     <div className="mt-2">
                       <Select
