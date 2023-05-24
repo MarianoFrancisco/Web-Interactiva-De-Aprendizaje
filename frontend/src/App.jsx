@@ -35,7 +35,7 @@ function App() {
           <Route element={<NavBarLayout />}>
             <Route path="/" element={<RoomTest />} />
             <Route path="/commentsUsers" element={<CommentUser />} />
-            <Route path="/ranking" element={<Ranking />} />
+            <Route path="/ranking/:game" element={<Ranking />} />
             <Route path="/pruebaRanking" element={<PruebaRanking />} />
             {/* 
           <Route path="/product/:id" element={<ProductOverview />} />

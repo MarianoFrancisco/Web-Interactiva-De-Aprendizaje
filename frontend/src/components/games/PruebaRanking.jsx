@@ -16,15 +16,13 @@ export default function Ranking() {
     } = useForm();
     const { resultsForGame, getResultsForGame } = useResults();
     const navigate = useNavigate();
+    const goToRankig = () => {
+        navigate(`/ranking/${`646db934ea129869725ac195`}`)
+    }
 
     return (
         <>
-            <Button label="IR A RANKING" onClick={
-                async () => {
-                    navigate('/ranking', {
-                        state: getResultsForGame("646d90b1b6cf6f19d29669e8")
-                    })
-                }} />
+            <Button label="IR A RANKING" onClick={() => goToRankig()} />
         </>
     );
 }

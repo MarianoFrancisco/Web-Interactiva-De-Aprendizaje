@@ -21,14 +21,17 @@ const useResult = () => {
             });
     };
 
-    const getResultsForGame = async(id) => {
-        await axios
-            .get(`${RESULT_URL}/get-for-game/${id}`)
-            .then((res) => {return res.data})
-            .catch((err) => {
-                console.log(err);
-            });
-    };
+    const getResultsForGame = (id) => {
+        return axios
+          .get(`${RESULT_URL}/get-for-game/${id}`)
+          .then((response) => {
+            return response.data;
+          })
+          .catch((error) => {
+            console.log(error);
+            return null;
+          });
+      };
 
     const getResultsByUser = (id) => {
         axiosPrivate

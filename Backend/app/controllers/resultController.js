@@ -20,7 +20,7 @@ const getResultsForGame = async (req, res) => {
         const id = req.params.id;
         const results = await Result.find({ _id: id});
         if (results.length > 0) {
-            res.status(200).json(results);
+            res.status(200).json(results[0]);
         } else {
             res.status(404).jason({ message: 'No se encontraron resultados de este juego...' })
         }
