@@ -5,6 +5,7 @@ export default function MemoryPlay({ couples }) {
   const [cards, setCards] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
   const [matchedCards, setMatchedCards] = useState([]);
+  const [completed, setCompeted] = useState(false);
 
   useEffect(() => {
     const shuffledCards = shuffleCards(couples);
@@ -50,6 +51,7 @@ export default function MemoryPlay({ couples }) {
           title: `Juego Completado`,
           showConfirmButton: true
         });
+        setCompeted(true);
       } else {
         Swal.fire({
           icon: 'success',
@@ -80,30 +82,38 @@ export default function MemoryPlay({ couples }) {
   let idList = [];
 
   return (
-    <div className="flex flex-wrap justify-center">
-      {cards.map((card, index) => {
-        let textCard = '';
-        if (idList.includes(card.id)) {
-          textCard = card.second;
-        } else {
-          idList.push(card.id);
-          textCard = card.first;
-        }
-        card.index = index;
-        card.text = textCard;
-        return (
-          <div key={`${card._id}-${index}`}
-            className={`card rounded-md m-2 p-4 text-center cursor-pointer ${isCardFlipped(card) ? "bg-green-500" : "bg-blue-500"}`}
-            onClick={() => handleCardClick(card)}
-          >
-            {isCardFlipped(card) ? (
-              <p className="text-white">{card.text}</p>
-            ) : (
-              <p className="text-white">{'←→'}</p>
-            )}
-          </div>
-        );
-      })}
-    </div>
+    <>
+      {completed ? (
+        <div className="flex flex-wrap justify-center item-center mt-8">
+          <p className="font-bold text-xl">Juego Completado</p>
+        </div>
+      ) : (
+        <div className="flex flex-wrap justify-center">
+          {cards.map((card, index) => {
+            let textCard = '';
+            if (idList.includes(card.id)) {
+              textCard = card.second;
+            } else {
+              idList.push(card.id);
+              textCard = card.first;
+            }
+            card.index = index;
+            card.text = textCard;
+            return (
+              <div key={`${card._id}-${index}`}
+                className={`card rounded-md m-2 p-4 text-center cursor-pointer ${isCardFlipped(card) ? "bg-green-500" : "bg-blue-500"}`}
+                onClick={() => handleCardClick(card)}
+              >
+                {isCardFlipped(card) ? (
+                  <p className="text-white">{card.text}</p>
+                ) : (
+                  <p className="text-white">{'←→'}</p>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </>
   );
 }
