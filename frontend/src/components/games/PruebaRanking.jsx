@@ -17,7 +17,7 @@ export default function Ranking() {
     const { resultsForGame, getResultsForGame } = useResults();
     const navigate = useNavigate();
     const goToRankig = () => {
-        navigate(`/ranking/${`646db934ea129869725ac195`}`)
+        navigate(`/ranking/${`646da997a4c22b344ecbd553`}`)
     }
 
     return (

@@ -12,7 +12,7 @@ const resultSchema = new Schema({
         {
             player: {
                 type: Schema.Types.ObjectId,
-                ref: "User",
+                ref: "users",
                 required: true,
             },
             score: {
