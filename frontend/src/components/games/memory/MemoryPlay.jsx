@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Swal from 'sweetalert2';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 
 export default function MemoryPlay({ couples }) {
   const [cards, setCards] = useState([]);
@@ -88,30 +90,37 @@ export default function MemoryPlay({ couples }) {
           <p className="font-bold text-xl">Juego Completado</p>
         </div>
       ) : (
-        <div className="flex flex-wrap justify-center">
-          {cards.map((card, index) => {
-            let textCard = '';
-            if (idList.includes(card.id)) {
-              textCard = card.second;
-            } else {
-              idList.push(card.id);
-              textCard = card.first;
-            }
-            card.index = index;
-            card.text = textCard;
-            return (
-              <div key={`${card._id}-${index}`}
-                className={`card rounded-md m-2 p-4 text-center cursor-pointer ${isCardFlipped(card) ? "bg-green-500" : "bg-blue-500"}`}
-                onClick={() => handleCardClick(card)}
-              >
-                {isCardFlipped(card) ? (
-                  <p className="text-white">{card.text}</p>
-                ) : (
-                  <p className="text-white">{'←→'}</p>
-                )}
-              </div>
-            );
-          })}
+        <div className="bg-white h-full mt-14">
+          <div className="flex justify-center items-center h-full">
+            <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+              {cards.map((card, index) => {
+                let textCard = '';
+                if (idList.includes(card.id)) {
+                  textCard = card.second;
+                } else {
+                  idList.push(card.id);
+                  textCard = card.first;
+                }
+                card.index = index;
+                card.text = textCard;
+                return (
+                  <div
+                    key={`${card._id}-${index}`}
+                    className={`card w-full h-full rounded-md m-2 p-4 text-center cursor-pointer ${isCardFlipped(card) ? "bg-green-500" : "bg-blue-500"}`}
+                    onClick={() => handleCardClick(card)}
+                  >
+                    <div className="flex flex-col justify-center items-center h-full">
+                      {isCardFlipped(card) ? (
+                        <p className="text-white text-xl font-bold">{card.text}</p>
+                      ) : (
+                        <FontAwesomeIcon icon={faArrowsRotate} className="text-white h-32" />
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       )}
     </>
