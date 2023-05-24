@@ -18,7 +18,9 @@ const insertResult = async (req, res) => {
 const getResultsForGame = async (req, res) => {
     try {
         const id = req.params.id;
-        const results = await Result.find({ _id: id});
+        const results = await Result.find({ _id: id}).populate("players.player", {
+            username: 1,
+        });
         if (results.length > 0) {
             res.status(200).json(results[0]);
         } else {
