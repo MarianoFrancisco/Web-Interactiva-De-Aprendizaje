@@ -15,6 +15,7 @@ import RoomTest from "./components/RoomTest";
 import Comment from "./components/comment/Comment";
 import CommentUser from "./components/comment/CommentGuest";
 import Medal from "./components/medal/Medal";
+import UsersList from "./components/UsersList";
 
 export const ROLES = {
   Student: 2000,
@@ -67,8 +68,8 @@ function App() {
             </Route>
 
             <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
-              {/* <Route path="/users" element={<Users />} />
-            <Route path="/new-employee" element={<Register admin={true} />} /> */}
+              <Route path="/users" element={<UsersList />} />
+              <Route path="/new-employee" element={<Register admin={true} />} />
             </Route>
 
             {/* catch all */}
