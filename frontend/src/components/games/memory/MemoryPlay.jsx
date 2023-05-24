@@ -90,7 +90,7 @@ export default function MemoryPlay({ couples }) {
           <p className="font-bold text-xl">Juego Completado</p>
         </div>
       ) : (
-        <div className="bg-white h-full mt-14">
+        <div className="bg-white h-full mt-14 mb-16">
           <div className="flex justify-center items-center h-full">
             <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
               {cards.map((card, index) => {
