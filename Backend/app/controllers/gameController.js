@@ -2,6 +2,23 @@ const { default: mongoose } = require("mongoose");
 const Game = require("../models/Game");
 const User = require("../models/User");
 
+const getAllGames = async (req, res) => {
+  try {
+    const games = await Game.find()
+      .populate("user", {
+        username: 1,
+      })
+      .populate("game_type", {
+        name: 1,
+      });
+    res.status(200).json(games);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Ocurrio un error interno en el servidor..." });
+  }
+};
+
 const insertGame = async (req, res) => {
   try {
     const { game_type, description, name, data, time = 5000 } = req.body;
@@ -181,4 +198,5 @@ module.exports = {
   getGame,
   updateGame,
   getUserLoginGames,
+  getAllGames,
 };

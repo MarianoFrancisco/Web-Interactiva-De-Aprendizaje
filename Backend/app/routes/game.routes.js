@@ -5,7 +5,8 @@ const {
   getGame,
   deleteGame,
   updateGame,
-  getUserLoginGames
+  getUserLoginGames,
+  getAllGames
 } = require("../controllers/gameController");
 const { insertDetail, deleteDetail } = require("../controllers/detailController");
 const { deleteResult } = require('../controllers/resultController');
@@ -30,4 +31,5 @@ routes.patch('/', verifyJWT, verifyRoles(ROLES_LIST.Teacher), updateGame);
 routes.get("/:id", verifyJWT, verifyRoles(ROLES_LIST.Teacher), getGame);
 routes.delete('/delete-game/:id', verifyJWT, verifyRoles(ROLES_LIST.Teacher), deleteResult, deleteGame);
 routes.get('/profile/games', verifyJWT, verifyRoles(ROLES_LIST.Teacher), getUserLoginGames);
+routes.get('/', getAllGames);
 module.exports = routes;
