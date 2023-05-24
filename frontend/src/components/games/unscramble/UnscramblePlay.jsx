@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import Swal from 'sweetalert2';
+import AuthContext from "../../../context/AuthProvider";
+import useGameTypes from "../../../hooks/useGameType";
+import useMedals from "../../../hooks/useMedal";
 
 export default function UnscramblePlay({ words = [] }) {
   const [currentWord, setCurrentWord] = useState(0);
@@ -9,6 +12,12 @@ export default function UnscramblePlay({ words = [] }) {
   const [resUser, setResUser] = useState([]);
   const [tryesFailed, setTryesFailed] = useState(0);
   const [points, setPoints] = useState(100);
+  const medalSavedRef = useRef(false);
+  const { gameTypes } = useGameTypes();
+  const { insertMedal } = useMedals();
+  const { auth } = useContext(AuthContext);
+  let game_type="";
+
 
   useEffect(() => {
     const failed = tryesFailed;
@@ -37,6 +46,25 @@ export default function UnscramblePlay({ words = [] }) {
   useEffect(() => {
 
   }, [currentWord])
+
+  gameTypes.map((gameTypes, index) => {
+    if (gameTypes.name == "Descifrado") {
+      game_type=gameTypes._id;
+    }
+  })
+
+  const saveMedal = (game_type) => {
+    const position="";
+    if(points==null){
+      position="1";
+    }else if(points){
+
+    }
+    if(position!=""){
+    const medal={position:position,game_type:game_type};
+    insertMedal(medal);
+    }
+  };
 
   const messLetters = (wordsArray) => {
     return wordsArray.map((word) => {
