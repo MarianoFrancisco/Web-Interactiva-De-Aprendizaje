@@ -1,6 +1,0 @@
-Lenguaje de programación Backend: Java
-Frontend: Html, CSS
-Framework: Angular, Spring Boot
-Descripción:
-Elaborar una página web interactiva con usuarios mediante juegos donde se puedan crear los juegos,
-participar en ellos, por medio de roles asignados, ya sea estudiante, profesor y administrador
