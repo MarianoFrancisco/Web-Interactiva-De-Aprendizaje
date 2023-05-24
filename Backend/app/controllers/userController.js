@@ -66,12 +66,17 @@ const deleteUser = async (req, res) => {
 }
 
 const getUser = async (req, res) => {
-    if (!req?.params?.id) return res.status(400).json({ "message": 'User ID required' });
-    const user = await User.findOne({ _id: req.params.id }).exec();
-    if (!user) {
-        return res.status(204).json({ 'message': `User ID ${req.params.id} not found` });
+    try {
+        const id = req.userId;
+        const results = await User.find({ _id: id});
+        if (results.length > 0) {
+            res.status(200).json(results[0]);
+        } else {
+            res.status(404).jason({ message: 'No se encontraron resultados de este usuario...' })
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Ocurrio un error interno en el servidor...' });
     }
-    res.json(user);
 }
 
 module.exports = {

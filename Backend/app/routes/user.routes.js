@@ -19,6 +19,8 @@ routes
   .patch([verifyJWT, verifyRoles(ROLES_LIST.Admin)], updateUser)
   .delete([verifyJWT, verifyRoles(ROLES_LIST.Admin)], deleteUser);
 
+routes.get("/profile",verifyJWT, verifyRoles(ROLES_LIST.Admin,ROLES_LIST.Student,ROLES_LIST.Admin), getUser);
+
 routes.route("/login").post(auth.handleLogin);
 routes.route("/logout").get(auth.handleLogout);
 

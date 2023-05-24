@@ -19,6 +19,7 @@ import UsersList from "./components/UsersList";
 import Ranking from "./components/games/Ranking"
 import PruebaRanking from "./components/games/PruebaRanking"
 import RoomForm from "./components/room/RoomForm";
+import Profile from "./components/Profile";
 
 export const ROLES = {
   Student: 2000,
@@ -51,6 +52,15 @@ function App() {
               {/* <Route path="/product-form" element={<ProductForm />} />
             <Route path="/profile/products" element={<ProductsList profile={true} />} />
           <Route path="/cards" element={<CreditCardList />} /> */}
+            </Route>
+            <Route
+              element={
+                <RequireAuth allowedRoles={[ROLES.Teacher, ROLES.Student,ROLES.Admin]} />
+              }
+            >
+              <Route path="/myProfile" element={<Profile />} />
+            </Route>
+            <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
             </Route>
             <Route
               element={

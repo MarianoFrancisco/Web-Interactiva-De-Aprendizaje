@@ -86,6 +86,10 @@ export default function NavBar() {
     navigate("/");
     navigation = [];
   };
+  const myProfile = async () => {
+    await navigate("/myProfile");
+    navigation = [];
+  };
   return (
     <Disclosure as="nav" className="bg-emerald-600">
       {({ open }) => (
@@ -175,7 +179,7 @@ export default function NavBar() {
                           <Menu.Item>
                             {({ active }) => (
                               <a
-                                href="#"
+                              onClick={myProfile}
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700"
