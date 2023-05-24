@@ -29,8 +29,10 @@ export default function RoomForm() {
     <section>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm text-center">
-
-          <FontAwesomeIcon icon={faUsers} className="mx-auto h-20 w-auto text-emerald-900"/>
+          <FontAwesomeIcon
+            icon={faUsers}
+            className="mx-auto h-20 w-auto text-emerald-900"
+          />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Unirme a una sala
           </h2>
@@ -54,6 +56,11 @@ export default function RoomForm() {
                     value: true,
                     message: "Debes ingresar un username para ingresar",
                   },
+                  pattern: {
+                    value: /^[A-z][A-z0-9-_]{3,23}$/,
+                    message:
+                      "Debes ingresar un username de al menos 4 caracteres",
+                  },
                 })}
               />
             </div>
@@ -66,6 +73,10 @@ export default function RoomForm() {
                   required: {
                     value: true,
                     message: "Ingresa un codigo para ingresar",
+                  },
+                  pattern: {
+                    value: /^\d{6}$/,
+                    message: "El codigo es un numero de 6 digitos",
                   },
                 })}
               />
