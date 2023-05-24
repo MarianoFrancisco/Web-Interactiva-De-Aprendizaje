@@ -6,6 +6,14 @@ export default function UnscramblePlay({ words = [] }) {
   const [wordList, setWordList] = useState([]);
   const [selectedLetters, setSelectedLetters] = useState([]);
   const [completeWord, setCompleteWord] = useState(false);
+  const [resUser, setResUser] = useState([]);
+  const [tryesFailed, setTryesFailed] = useState(0);
+  const [points, setPoints] = useState(100);
+
+  useEffect(() => {
+    const failed = tryesFailed;
+    setPoints(100 - (100 / wordList.length) * failed);
+  }, [tryesFailed])
 
   useEffect(() => {
     const messLettersWords = messLetters(words);
@@ -19,8 +27,8 @@ export default function UnscramblePlay({ words = [] }) {
         selectedLetters.forEach((item) => {
           finalWord += item.letter;
         })
-        console.log(finalWord);
         checkCorrectWord(finalWord);
+        setResUser((prevWords) => [...prevWords, finalWord]);
         setCompleteWord(true);
       }
     }
@@ -89,6 +97,7 @@ export default function UnscramblePlay({ words = [] }) {
         title: `Fallaste, la palabra era: '${realWord}'`,
         showConfirmButton: true
       });
+      setTryesFailed((prevCount) => prevCount + 1);
     }
   }
 
@@ -110,9 +119,37 @@ export default function UnscramblePlay({ words = [] }) {
   return (
     <div className="w-3/4 mt-14 md:w-1/2 mx-auto">
       {currentWord === wordList.length ? (
-        <div className="flex justify-center items-center">
-          <p className="text-xl, font-bold">El juego ha terminado</p>
-        </div>
+        <>
+          <h1 className="mt-10 text-center text-4xl font-bold">Has Terminado el Juego</h1>
+          <h1 className="mt-10 text-center text-2xl bg-emerald-100 font-bold leading-9 tracking-tight text-black-900">PUNTEO TOTAL:  {points ? points : 100}/100</h1>
+          <br />
+          <div className="flex justify-center items-center">
+            <table className="table-fixed w-1/2" style={{ border: "1px solid black", borderRadius: "10px" }}>
+              <thead>
+                <tr>
+                  <th className="font-bold text-center border-b border-black-200 py-4" style={{ border: "1px solid black", borderRadius: "10px" }}>
+                    Palabra Ingresada
+                  </th>
+                  <th className="font-bold text-center border-b border-black-200 py-4" style={{ border: "1px solid black", borderRadius: "10px" }}>
+                    Palabra Correcta
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {wordList.map((word, index) => (
+                  <tr key={index}>
+                    <td className="font-bold text-center border-b border-black-200 py-4" style={{ border: "1px solid black", borderRadius: "10px" }}>
+                      {resUser[index]}
+                    </td>
+                    <td className="font-bold text-center border-b border-black-200 py-4" style={{ border: "1px solid black", borderRadius: "10px" }}>
+                      {word.word}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
       ) : (
         <>
           <div className="card h-32 rounded-lg text-center bg-amber-500 p-4 mb-4 flex items-center justify-center">
