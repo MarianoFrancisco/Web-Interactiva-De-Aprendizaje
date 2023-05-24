@@ -13,6 +13,7 @@ import QuizPlay from "./components/games/quiz/QuizPlay";
 import Room from "./components/games/Room";
 import RoomTest from "./components/RoomTest";
 import Comment from "./components/comment/Comment";
+import CommentUser from "./components/comment/CommentGuest";
 
 export const ROLES = {
   Student: 2000,
@@ -30,6 +31,7 @@ function App() {
         <Route element={<PersistLogin />}>
           <Route element={<NavBarLayout />}>
             <Route path="/" element={<RoomTest/>} />
+            <Route path="/commentsUsers" element={<CommentUser />} />
             {/* 
           <Route path="/product/:id" element={<ProductOverview />} />
           <Route path="/unauthorized" element={<Unauthorized />} /> */}

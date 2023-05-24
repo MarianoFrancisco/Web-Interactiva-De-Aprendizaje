@@ -6,6 +6,6 @@ const ROLES_LIST = require('../../config/roles_list');
 
 const routes = express.Router();
 routes.post('/add-comment', verifyJWT, verifyRoles(ROLES_LIST.Teacher,ROLES_LIST.Student), insertComment);
-routes.get('/get-comment', verifyJWT, verifyRoles(ROLES_LIST.Teacher,ROLES_LIST.Student), getAllComents);
+routes.get('/get-comment', getAllComents);
 
 module.exports = routes;
