@@ -15,6 +15,8 @@ import RoomTest from "./components/RoomTest";
 import Comment from "./components/comment/Comment";
 import CommentUser from "./components/comment/CommentGuest";
 import Medal from "./components/medal/Medal";
+import Ranking from "./components/games/Ranking"
+import PruebaRanking from "./components/games/PruebaRanking"
 
 export const ROLES = {
   Student: 2000,
@@ -33,6 +35,8 @@ function App() {
           <Route element={<NavBarLayout />}>
             <Route path="/" element={<RoomTest />} />
             <Route path="/commentsUsers" element={<CommentUser />} />
+            <Route path="/ranking" element={<Ranking />} />
+            <Route path="/pruebaRanking" element={<PruebaRanking />} />
             {/* 
           <Route path="/product/:id" element={<ProductOverview />} />
           <Route path="/unauthorized" element={<Unauthorized />} /> */}
