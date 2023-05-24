@@ -54,6 +54,7 @@ export default function QuizPlay({ questions = [] }) {
               className={`card w-full p-4 mb-2 md:mb-4 rounded-lg ${answerColor}`}
             >
               <input
+              id={`answer_${currentQuestion}`}
                 type="radio"
                 name={`answer_${currentQuestion}`}
                 value={answer}
@@ -61,7 +62,7 @@ export default function QuizPlay({ questions = [] }) {
                 checked={isSelectedAnswer}
                 disabled={isAnswered}
               />
-              <label className="ml-2">{answer}</label>
+              <label className="ml-2" htmlFor={`answer_${currentQuestion}`}>{answer}</label>
             </div>
           );
         })}
