@@ -18,6 +18,7 @@ import Medal from "./components/medal/Medal";
 import UsersList from "./components/UsersList";
 import Ranking from "./components/games/Ranking"
 import PruebaRanking from "./components/games/PruebaRanking"
+import RoomForm from "./components/room/RoomForm";
 
 export const ROLES = {
   Student: 2000,
@@ -35,6 +36,7 @@ function App() {
         <Route element={<PersistLogin />}>
           <Route element={<NavBarLayout />}>
             <Route path="/" element={<RoomTest />} />
+            <Route path="/enter-room" element={<RoomForm />} />
             <Route path="/commentsUsers" element={<CommentUser />} />
             <Route path="/ranking/:game" element={<Ranking />} />
             <Route path="/pruebaRanking" element={<PruebaRanking />} />
