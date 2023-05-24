@@ -19,8 +19,9 @@ const Register = ({
   setEdit,
   edit = {
     username: "",
-    firstname: "",
-    lastname: "",
+    fullname: "",
+    email: '',
+    birthdayDate: '',
     roles: {},
   },
 }) => {
@@ -31,7 +32,14 @@ const Register = ({
     formState: { errors },
     setError,
     watch,
-  } = useForm();
+  } = useForm({
+    defaultValues:{
+      fullname: edit.fullname,
+      username: edit.username,
+      email: edit.email,
+      birthdayDate: new Date(edit.birthdayDate).toLocaleDateString("en-CA")
+    }
+  });
   const roles = [
     {
       name: "Estudiante",
@@ -72,15 +80,22 @@ const Register = ({
   const onSubmit = (data) => {
     data.roles = rol.value;
     data.password = data.pwd;
-    createNewUser(data).then(() => {
-      reset()
-      if(admin){
-        navigate("/users", {replace:true})
-      }else{
-        navigate("/login");
-      }
+    if (edit._id) {
+      data._id = edit._id;
+      updateUser(data);
+      reset();
+      setEdit({});
+      navigate("/users", { replace: true });
+    } else {
+      createNewUser(data).then(() => {
+        reset();
+        if (admin) {
+          navigate("/users", { replace: true });
+        } else {
+          navigate("/login");
+        }
+      });
     }
-    );
   };
 
   return (
@@ -151,6 +166,7 @@ const Register = ({
 
                   <div className="col-span-full">
                     <Input
+                      readOnly={edit._id ? true : false}
                       label="Usuario"
                       type="text"
                       errors={errors}
@@ -209,7 +225,7 @@ const Register = ({
                       id="pwd"
                       register={register("pwd", {
                         required: {
-                          value: true,
+                          value: edit._id ? false : true,
                           message:
                             "Debes ingresar una contraseña para registrarte",
                         },
@@ -230,7 +246,7 @@ const Register = ({
                       id="pwdConfirm"
                       register={register("pwdConfirm", {
                         required: {
-                          value: true,
+                          value: edit._id ? false : true,
                           message:
                             "Debes confirmar tu contraseña para registrarte",
                         },

@@ -37,7 +37,23 @@ const createNewUser = async (req, res) => {
 }
 
 const updateUser = async (req, res) => {
+    console.log(req.body);
+    if (!req?.body?._id) {
+        return res.status(400).json({ 'message': 'ID parameter is required.' });
+    }
 
+    const user = await User.findOne({ _id: req.body._id }).exec();
+    if (!user) {
+        return res.status(204).json({ "message": `No user matches ID ${req.body.id}.` });
+    }
+    if (req.body?.fullname) user.fullname = req.body.fullname;
+    if (req.body?.roles) user.roles = req.body.roles;
+    if (req.body?.password) user.password = req.body.password;
+    if (req.body?.email) user.email = req.body.email;
+    if (req.body?.birthdayDate) user.birthdayDate = req.body.birthdayDate;
+    const result = await user.save();
+    console.log(result);
+    res.json(result);
 }
 
 const deleteUser = async (req, res) => {
