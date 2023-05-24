@@ -7,6 +7,15 @@ const useGames = () => {
   const axiosPrivate = useAxiosPrivate();
   const [games, setGames] = useState([]);
 
+  const getAllGames = () => {
+    axios
+      .get(GAME_URL)
+      .then((res) => {
+        setGames(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
   const getGame = async (id) => {
     return axiosPrivate
       .get(`${GAME_URL}/${id}`)
@@ -76,6 +85,7 @@ const useGames = () => {
     getGamesByUser,
     deleteGame,
     getGame,
+    getAllGames
   };
 };
 

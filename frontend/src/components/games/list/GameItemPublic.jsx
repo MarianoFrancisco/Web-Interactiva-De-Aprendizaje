@@ -9,7 +9,7 @@ import { useContext } from "react";
 import AuthContext from "../../../context/AuthProvider";
 import { ROLES } from "../../../App";
 
-export default function GameItem({ game, deleteGame, setEdit }) {
+export default function GameItemPublic({ game }) {
   const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
   const play = (id) => {
@@ -27,21 +27,12 @@ export default function GameItem({ game, deleteGame, setEdit }) {
       <div className="flex justify-between mt-auto">
         <div className="text-lg font-medium text-gray-900">{game.name}</div>
         <div className="space-x-1">
-          {auth?.roles?.includes(ROLES.Teacher) ? (
-            <button
-              onClick={() => deleteGame(game._id)}
-              className="items-center justify-center rounded-md border border-transparent bg-rose-600 p-1 text-base font-medium text-white hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2"
-            >
-              <FontAwesomeIcon icon={faTrash} className="block h-6 w-6" />
-            </button>
-          ) : (
-            <button
+        <button
               className="items-center justify-center rounded-md border border-transparent bg-emerald-600 p-1 text-base font-medium text-white hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
               onClick={() => play(game._id)}
             >
               <FontAwesomeIcon icon={faPlay} className="block h-6 w-6" />
             </button>
-          )}
         </div>
       </div>
     </div>

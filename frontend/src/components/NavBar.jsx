@@ -54,6 +54,11 @@ export default function NavBar() {
         current: false,
       },
       {
+        name: "Jugar Solo",
+        href: "/games",
+        current: false,
+      },
+      {
         name: "Medallas",
         href: "/medals",
         current: false,
@@ -71,6 +76,11 @@ export default function NavBar() {
       {
         name: "Entrar a sala",
         href: "/enter-room",
+        current: false,
+      },
+      {
+        name: "Jugar Solo",
+        href: "/games",
         current: false,
       },
       {
