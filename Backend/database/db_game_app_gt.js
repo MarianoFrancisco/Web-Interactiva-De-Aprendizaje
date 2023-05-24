@@ -5,6 +5,7 @@ db.createCollection("details");
 db.createCollection("games");
 db.createCollection("results");
 db.createCollection("comments");
+db.createCollection("medals");
 
 db.gametypes.insertMany([
   {

@@ -14,6 +14,7 @@ import Room from "./components/games/Room";
 import RoomTest from "./components/RoomTest";
 import Comment from "./components/comment/Comment";
 import CommentUser from "./components/comment/CommentGuest";
+import Medal from "./components/medal/Medal";
 
 export const ROLES = {
   Student: 2000,
@@ -30,7 +31,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route element={<PersistLogin />}>
           <Route element={<NavBarLayout />}>
-            <Route path="/" element={<RoomTest/>} />
+            <Route path="/" element={<RoomTest />} />
             <Route path="/commentsUsers" element={<CommentUser />} />
             {/* 
           <Route path="/product/:id" element={<ProductOverview />} />
@@ -38,13 +39,14 @@ function App() {
 
             {/* we want to protect these routes */}
             <Route element={<RequireAuth allowedRoles={[ROLES.Student]} />}>
+              <Route path="/medals" element={<Medal />} />
               {/* <Route path="/product-form" element={<ProductForm />} />
             <Route path="/profile/products" element={<ProductsList profile={true} />} />
           <Route path="/cards" element={<CreditCardList />} /> */}
             </Route>
             <Route
               element={
-                <RequireAuth allowedRoles={[ROLES.Teacher,ROLES.Student]} />
+                <RequireAuth allowedRoles={[ROLES.Teacher, ROLES.Student]} />
               }
             >
               <Route path="/comments" element={<Comment />} />

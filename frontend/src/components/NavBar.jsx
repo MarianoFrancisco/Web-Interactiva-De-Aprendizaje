@@ -49,6 +49,11 @@ export default function NavBar() {
     // Opción adicional para el rol de entrega
     navigation.push(
       {
+        name: "Medallas",
+        href: "/medals",
+        current: false,
+      },
+      {
         name: "Comentarios",
         href: "/comments",
         current: false,
