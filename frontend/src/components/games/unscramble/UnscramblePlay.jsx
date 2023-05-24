@@ -119,16 +119,22 @@ export default function UnscramblePlay({ words = [] }) {
             <h3 className="text-xl font-bold text-white">Ordena la palabra</h3>
           </div>
 
-          <div className="flex flex-wrap justify-center">
-            {wordN && wordN.letters.map((letter, index) => (
-              <div key={index}
-                className={`card rounded-md m-2 p-4 text-center cursor-pointer ${isLetterClicked(letter) ? "bg-green-500" : "bg-blue-500"}`}
-                onClick={() => handleLetterClick(letter)}
-              >
-                <p className="text-white font-bold">{letter.letter}</p>
-              </div>
-            ))}
-          </div>
+          {completeWord ? (
+            <div className="flex justify-center items-center">
+              <p className="text-xl, font-bold">Palabra Enviada</p>
+            </div>
+          ) : (
+            <div className="flex flex-wrap justify-center">
+              {wordN && wordN.letters.map((letter, index) => (
+                <div key={index}
+                  className={`card rounded-md m-2 p-4 text-center cursor-pointer ${isLetterClicked(letter) ? "bg-green-500" : "bg-blue-500"}`}
+                  onClick={() => handleLetterClick(letter)}
+                >
+                  <p className="text-white font-bold">{letter.letter}</p>
+                </div>
+              ))}
+            </div>
+          )}
 
           <div className="flex flex-wrap justify-center mt-5 bg-blue-200 rounded-md p-4">
             <input type="text" readOnly={true} value={updatePreview()} />
