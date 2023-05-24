@@ -1,15 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import useGameTypes from "../../../hooks/useGameType";
+import useMedals from "../../../hooks/useMedal";
+import AuthContext from "../../../context/AuthProvider";
+import React, { useRef } from "react";
 import Swal from 'sweetalert2';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 
 export default function MemoryPlay({ couples }) {
+  const medalSavedRef = useRef(false);
   const [cards, setCards] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
   const [matchedCards, setMatchedCards] = useState([]);
   const [completed, setCompeted] = useState(false);
   const [tryes, setTryes] = useState(0);
   const [points, setPoints] = useState(100);
+  const { gameTypes } = useGameTypes();
+  const { insertMedal } = useMedals();
+  const { auth } = useContext(AuthContext);
+
+  const saveMedal = (position, game_type) => {
+    const medal = {
+      position: position,
+      game_type: game_type
+    };
+    insertMedal(medal);
+  };
 
   useEffect(() => {
     if (tryes > couples.length) {
@@ -93,6 +109,16 @@ export default function MemoryPlay({ couples }) {
 
   let idList = [];
 
+  let obtainMedal = (100 - points);
+  let myMedal;
+  let game_type="";
+  
+  gameTypes.map((gameTypes, index) => {
+    if (gameTypes.name == "Memoria") {
+      game_type = gameTypes._id;
+    }
+  })
+
   return (
     <>
       {completed ? (
@@ -129,6 +155,29 @@ export default function MemoryPlay({ couples }) {
               </tbody>
             </table>
           </div>
+          {auth.username != null && !medalSavedRef.current && (
+            <>
+              {obtainMedal === 0 && (
+                <div>
+                  {myMedal = "1"}
+                  {saveMedal(myMedal, game_type)}
+                </div>
+              )}
+              {obtainMedal === 1.8 && (
+                <div>
+                  {myMedal = "2"}
+                  {saveMedal(myMedal, game_type)}
+                </div>
+              )}
+              {obtainMedal === 2.8 && (
+                <div>
+                  {myMedal = "3"}
+                  {saveMedal(myMedal, game_type)}
+                </div>
+              )}
+              {medalSavedRef.current = true}
+            </>
+          )}
         </>
       ) : (
         <div className="bg-white h-full mt-14 mb-16">
